@@ -1,62 +1,83 @@
 <html>
   <head></head>
   <body>
-    <table>
+    <table width="100%">
       <tbody>
         <tr>
           <td valign="top">
+            <!-- Main Navigation-->
             <ul>
-              <li>
-                <a href="/Kanbas/Account/Navigation/index.html"> Account</a>
-              </li>
-              <li>
-                <a href="/Kanbas/Dashboard/screen.html">Dashboard</a>
-              </li>
-              <li>
-                <a href="/Kanbas/Courses/Home/screen.html">Courses</a>
-              </li>
-              <li>
-                <a href="/Kanbas/Calendar/index.html">Calendar</a>
-              </li>
+              <li><a href="/Kanbas/Account/Navigation/index.html">
+                  Account</a></li>
+              <li><a href="/Kanbas/Dashboard/screen.html">Dashboard</a></li>
+              <li><a href="/Kanbas/Courses/Home/screen.html">Courses</a></li>
+              <li><a href="/Kanbas/Calendar/index.html">Calendar</a></li>
               <li><a href="/Kanbas/Inbox/index.html">Inbox</a></li>
+              <li><a href="/Kanbas/History/index.html">History</a></li>
+              <li><a href="/Kanbas/Studio/index.html">Studio</a></li>
+              <li><a href="/Kanbas/Commons/index.html">Commons</a></li>
+              <li><a href="/Kanbas/Help/index.html">Help</a></li>
             </ul>
           </td>
           <td valign="top">
+            <!-- Course Navigation -->
             <ul>
-              <li>
-                <a href="/Kanbas/Courses/Home/screen.html"> Home</a>
-              </li>
-              <li>
-                <a href="/Kanbas/Courses/Modules/screen.html"> Modules</a>
-              </li>
-              <li><a href="/Kanbas/Courses/Piazza/index.html"> Piazza</a></li>
-              <li><a href="/Kanbas/Courses/Grades/screen.html"> Grades</a></li>
-              <li>
-                <a href="/Kanbas/Courses/Assignments/screen.html">
-                  Assignments</a
-                >
-              </li>
+              <li><a href="/Kanbas/Courses/Home/screen.html">Home</a></li>
+              <li><a href="/Kanbas/Courses/Modules/screen.html">Modules</a></li>
+              <li><a href="/Kanbas/Courses/Piazza/index.html">Piazza</a></li>
+              <li><a
+                  href="/Kanbas/Courses/Zoom_Meetings/index.html">Zoom
+                  Meetings</a></li>
+              <li><a
+                  href="/Kanbas/Courses/Assignments/screen.html">Assignments</a></li>
+              <li><a href="/Kanbas/Courses/Quizzes/screen.html">Quizzes</a></li>
+              <li><a
+                  href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
+              <li><a
+                  href="/Kanbas/Courses/People/screen.html">People</a></li>
+              <li><a
+                  href="/Kanbas/Courses/Panopto_Video/screen.html">Panopto
+                  Video</a></li>
+              <li><a
+                  href="/Kanbas/Courses/Discussions/screen.html">Discussions</a></li>
+              <li><a
+                  href="/Kanbas/Courses/Announcements/screen.html">Announcements</a></li>
+              <li><a href="/Kanbas/Courses/Pages/screen.html">Pages</a></li>
+              <li><a
+                  href="/Kanbas/Courses/Files/screen.html">Files</a></li>
+              <li><a
+                  href="/Kanbas/Courses/Rubrics/screen.html">Rubrics</a></li>
+              <li><a
+                  href="/Kanbas/Courses/Outcomes/screen.html">Outcomes</a></li>
+              <li><a
+                  href="/Kanbas/Courses/Collaborations/screen.html">Collaborations</a></li>
+              <li><a href="/Kanbas/Courses/Syllabus/screen.html">Syllabus</a></li>
+              <li><a href="/Kanbas/Courses/Settings/screen.html">Settings</a></li>
             </ul>
           </td>
+
           <td>
             <form action="/Kanbas/Courses/Assignments/screen.html">
+
               <select>
                 <option>Speed Grader</option>
               </select>
               <hr />
+
               <h2>Assignment Name</h2>
               <input value="A1 - HTML" />
               <br />
               <br />
-              <textarea>
-      Assignment Description. In this assignment we are learning about HTML. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni mollitia veritatis iure, nam repellat pariatur consequatur, blanditiis fuga molestiae, magnam vitae natus ratione fugiat provident rerum doloribus odio dolore expedita?</textarea
-              >
+
+              <textarea>This is the assignment description.</textarea>
               <br />
               <br />
+
               <label for="points">Points</label><br />
               <input id="points" value="100" />
               <br />
               <br />
+
               <label>Assignment Group</label><br />
               <select>
                 <option>ASSIGNMENT</option>
@@ -66,27 +87,60 @@
               </select>
               <br />
               <br />
+
+              <label>Display Grade as</label><br />
+              <select>
+                <option>Percentage</option>
+                <option>Complete/Incomplete</option>
+                <option>Points</option>
+                <option>Letter Grade</option>
+                <option>Not Graded</option>
+              </select>
+              <br />
+              <br />
+
+              <label>Submission Type</label><br />
+              <select>
+                <option>Online</option>
+                <option>On Paper</option>
+                <option>No Submission</option>
+              </select>
+              <br />
+              <br />
+
               <label>Online Entry Options</label><br />
-              <label
-                ><input type="checkbox" name="online-entry-options" />Text
-                Entry</label
-              ><br />
-              <input type="checkbox" name="online-entry-options" />Website
-              URL<br />
-              <input type="checkbox" name="online-entry-options" />Media
-              Recordings<br />
-              <input type="checkbox" name="online-entry-options" />Student
-              Annotations<br />
+              <label><input type="checkbox" name="online-entry-options" />Text Entry</label><br />
+              <input type="checkbox" name="online-entry-options" />Website URL<br />
+              <input type="checkbox" name="online-entry-options" />Media Recordings<br />
+              <input type="checkbox" name="online-entry-options" />Student Annotations<br />
+              <input type="checkbox" name="online-entry-options" />File Uploads<br />
+              <input type="checkbox" name="online-entry-options" />Group Assignments<br />
+              <input type="checkbox" name="online-entry-options" />Peer Reviews<br />
               <br />
               <br />
-              <label>Due Date</label><br />
-              <input type="date" value="2020-09-01" /><br />
+
+              <label>Assign</label><br />
+              <label for="assign">Assign To</label><br />
+              <input id="assign" value="Everyone" />
+              <br />
+              <br />
+
+              <label>Due</label><br />
+              <input type="date" value="2021-01-01" /><br />
               <br />
               <br />
               <label>Available from</label><br />
-              <input type="date" value="2020-09-01" /><br /><br /><br />
-              <button>Cancel</button>
-              <button>Save</button>
+              <input type="date" value="2021-01-01" /><br /><br /><br />
+
+              <label>Until</label><br />
+              <input type="date" value="2021-01-01" /><br /><br /><br />
+
+              <a href="/Kanbas/Courses/Assignments/screen.html" role="button" style="text-decoration: none;">
+                <button type="button">Cancel</button>
+              </a>
+              <a href="/Kanbas/Courses/Assignments/screen.html" role="button" style="text-decoration: none;">
+                <button type="button">Save</button>
+              </a>
             </form>
           </td>
         </tr>

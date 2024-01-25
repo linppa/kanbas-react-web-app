@@ -5,19 +5,22 @@
       <option>Speed Grader</option>
     </select>
     <hr />
+
     <h2>Assignment Name</h2>
     <input value="A1 - HTML" />
     <br />
     <br />
+
     <textarea>
-Assignment Description. In this assignment we are learning about HTML. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni mollitia veritatis iure, nam repellat pariatur consequatur, blanditiis fuga molestiae, magnam vitae natus ratione fugiat provident rerum doloribus odio dolore expedita?</textarea
-    >
+This is the assignment description.</textarea>
     <br />
     <br />
+
     <label for="points">Points</label><br />
     <input id="points" value="100" />
     <br />
     <br />
+
     <label>Assignment Group</label><br />
     <select>
       <option>ASSIGNMENT</option>
@@ -27,22 +30,60 @@ Assignment Description. In this assignment we are learning about HTML. Lorem ips
     </select>
     <br />
     <br />
+
+    <label>Display Grade as</label><br />
+    <select>
+      <option>Percentage</option>
+      <option>Complete/Incomplete</option>
+      <option>Points</option>
+      <option>Letter Grade</option>
+      <option>Not Graded</option>
+    </select>
+    <br />
+    <br />
+
+    <label>Submission Type</label><br />
+    <select>
+      <option>Online</option>
+      <option>On Paper</option>
+      <option>No Submission</option>
+    </select>
+    <br />
+    <br />
+
     <label>Online Entry Options</label><br />
-    <label
-      ><input type="checkbox" name="online-entry-options" />Text Entry</label
-    ><br />
+    <label><input type="checkbox" name="online-entry-options" />Text Entry</label><br />
     <input type="checkbox" name="online-entry-options" />Website URL<br />
     <input type="checkbox" name="online-entry-options" />Media Recordings<br />
     <input type="checkbox" name="online-entry-options" />Student Annotations<br />
+    <input type="checkbox" name="online-entry-options" />File Uploads<br />
+    <input type="checkbox" name="online-entry-options" />Group Assignments<br />
+    <input type="checkbox" name="online-entry-options" />Peer Reviews<br />
     <br />
     <br />
-    <label>Due Date</label><br />
-    <input type="date" value="2020-09-01" /><br />
+
+    <label>Assign</label><br />
+    <label for="assign">Assign To</label><br />
+    <input id="assign" value="Everyone" />
+    <br />
+    <br />
+
+    <label>Due</label><br />
+    <input type="date" value="2021-01-01" /><br />
     <br />
     <br />
     <label>Available from</label><br />
-    <input type="date" value="2020-09-01" /><br /><br /><br />
-    <button>Cancel</button>
-    <button>Save</button>
+    <input type="date" value="2021-01-01" /><br /><br /><br />
+
+    <label>Until</label><br />
+    <input type="date" value="2021-01-01" /><br /><br /><br />
+
+    <a href="/Kanbas/Courses/Assignments/screen.html" role="button" style="text-decoration: none;">
+      <button type="button">Cancel</button>
+    </a>
+    <a href="/Kanbas/Courses/Assignments/screen.html" role="button" style="text-decoration: none;">
+      <button type="button">Save</button>
+    </a>
+
   </body>
 </html>
