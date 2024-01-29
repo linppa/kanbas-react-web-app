@@ -1,33 +1,79 @@
 <html>
-  <head> </head>
+  <head>
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+    <!-- External FontAwesome CSS link -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css" />
+  </head>
   <body>
-    <table width="100%">
+    <table>
       <tbody>
         <tr>
           <td valign="top">
             <!-- Main Kanbas Navigation-->
-            <ul>
-              <li><a href="/Kanbas/Account/Profile/screen.html">Account</a></li>
-              <li><a href="/Kanbas/Dashboard/screen.html">Dashboard</a></li>
-              <li><a href="/Kanbas/Courses/Home/screen.html">Courses</a></li>
-              <li><a href="#">Calendar</a></li>
-              <li><a href="#">Inbox</a></li>
-              <li><a href="#">History</a></li>
-              <li><a href="#">Studio</a></li>
-              <li><a href="#">Commons</a></li>
-              <li><a href="#">Help</a></li>
+            <ul class="wd-kanbas-navigation">
+              <li><a href="http://northeastern.edu">N</a></li>
+              <li>
+                <a href="/Kanbas/Account/Profile/screen.html"
+                  ><i class="fa fa-user icon-white"></i><br />Account</a
+                >
+              </li>
+              <li>
+                <a href="/Kanbas/Dashboard/screen.html"
+                  ><i class="fa fa-gauge"></i><br />
+                  Dashboard</a
+                >
+              </li>
+              <li class="wd-active">
+                <a href="/Kanbas/Courses/Home/screen.html"
+                  ><i class="fa fa-book"></i><br />Courses</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-calendar"></i><br />Calendar</a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-inbox"></i><br />Inbox</a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-clock"></i><br />History</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fa-brands fa-square-youtube"></i><br />Studio</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fa fa-arrow-up-right-from-square"></i
+                  ><br />Commons</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-circle-question"></i><br />Help</a>
+              </li>
             </ul>
           </td>
           <td valign="top">
             <!-- Course Navigation -->
-            <ul>
+            <ul class="wd-navigation">
               <li><a href="/Kanbas/Courses/Home/screen.html">Home</a></li>
-              <li><a href="#">Modules</a></li>
-              <li><a href="#">Piazza</a></li>
+              <li>
+                <a href="/Kanbas/Courses/Modules/screen.html">Modules</a>
+              </li>
+              <li><a href="http://piazza.com">Piazza</a></li>
               <li><a href="#">Zoom Meetings</a></li>
-              <li><a href="/Kanbas/Courses/Assignments/screen.html">Assignments</a></li>
+              <li>
+                <a href="/Kanbas/Courses/Assignments/screen.html"
+                  >Assignments</a
+                >
+              </li>
               <li><a href="#">Quizzes</a></li>
-              <li><a href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
+              <li class="wd-active"><a href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
               <li><a href="#">People</a></li>
               <li><a href="#">Panopto Video</a></li>
               <li><a href="#">Discussions</a></li>
@@ -38,7 +84,9 @@
               <li><a href="#">Outcomes</a></li>
               <li><a href="#">Collaborations</a></li>
               <li><a href="#">Syllabus</a></li>
-              <li><a href="/Kanbas/Courses/Settings/screen.html">Settings</a></li>
+              <li>
+                <a href="/Kanbas/Courses/Settings/screen.html">Settings</a>
+              </li>
             </ul>
           </td>
 
@@ -64,10 +112,13 @@
                     <button>Configure</button>
 
                     <h4>Student Names</h4>
-                    <input type="search" placeholder="Search Students">
+                    <input type="search" placeholder="Search Students" />
 
                     <h4>Assignment Names</h4>
-                    <input type="search" placeholder="Search Assignments"><br /><br />
+                    <input
+                      type="search"
+                      placeholder="Search Assignments"
+                    /><br /><br />
 
                     <button>Apply Filters</button><br /><br />
                   </td>
@@ -79,15 +130,15 @@
               <thead>
                 <tr>
                   <th>Student Name</th>
-                  <th>A1 SETUP<br>Out of 100</th>
-                  <th>A2 HTML<br>Out of 100</th>
-                  <th>A3 CSS<br>Out of 100</th>
-                  <th>A4 BOOTSTRAP<br>Out of 100</th>
-                  <th>A5 JAVASCRIPT<br>Out of 100</th>
-                  <th>A6 REACT<br>Out of 100</th>
-                  <th>A7 REDUX<br>Out of 100</th>
-                  <th>A8 NODE<br>Out of 100</th>
-                  <th>A9 MONGO<br>Out of 100</th>
+                  <th>A1 SETUP<br />Out of 100</th>
+                  <th>A2 HTML<br />Out of 100</th>
+                  <th>A3 CSS<br />Out of 100</th>
+                  <th>A4 BOOTSTRAP<br />Out of 100</th>
+                  <th>A5 JAVASCRIPT<br />Out of 100</th>
+                  <th>A6 REACT<br />Out of 100</th>
+                  <th>A7 REDUX<br />Out of 100</th>
+                  <th>A8 NODE<br />Out of 100</th>
+                  <th>A9 MONGO<br />Out of 100</th>
                 </tr>
               </thead>
 
@@ -112,13 +163,17 @@
                   <td align="center" valign="middle">86</td>
                   <td align="center" valign="middle">100</td>
                   <td align="center" valign="middle">94</td>
-                  <td align="center" valign="middle"><input size="3" value="85" /></td>
+                  <td align="center" valign="middle">
+                    <input size="3" value="85" />
+                  </td>
                   <td align="center" valign="middle">84</td>
                   <td align="center" valign="middle">92</td>
                 </tr>
                 <tr>
                   <td>Luke Skywalker</td>
-                  <td align="center" valign="middle"><input size="3" value="99" /></td>
+                  <td align="center" valign="middle">
+                    <input size="3" value="99" />
+                  </td>
                   <td align="center" valign="middle">88</td>
                   <td align="center" valign="middle">97</td>
                   <td align="center" valign="middle">82</td>
@@ -136,14 +191,18 @@
                   <td align="center" valign="middle">98</td>
                   <td align="center" valign="middle">86</td>
                   <td align="center" valign="middle">85</td>
-                  <td align="center" valign="middle"><input size="3" value="86" /></td>
+                  <td align="center" valign="middle">
+                    <input size="3" value="86" />
+                  </td>
                   <td align="center" valign="middle">80</td>
                   <td align="center" valign="middle">84</td>
                 </tr>
                 <tr>
                   <td>Lando Calresian</td>
                   <td align="center" valign="middle">83</td>
-                  <td align="center" valign="middle"><input size="3" value="92" /></td>
+                  <td align="center" valign="middle">
+                    <input size="3" value="92" />
+                  </td>
                   <td align="center" valign="middle">80</td>
                   <td align="center" valign="middle">80</td>
                   <td align="center" valign="middle">92</td>
@@ -168,7 +227,9 @@
                   <td>Darth Vader</td>
                   <td align="center" valign="middle">81</td>
                   <td align="center" valign="middle">81</td>
-                  <td align="center" valign="middle"><input size="3" value="96" /></td>
+                  <td align="center" valign="middle">
+                    <input size="3" value="96" />
+                  </td>
                   <td align="center" valign="middle">80</td>
                   <td align="center" valign="middle">89</td>
                   <td align="center" valign="middle">88</td>
@@ -178,7 +239,9 @@
                 </tr>
                 <tr>
                   <td>Obi-Wan Kenobi</td>
-                  <td align="center" valign="middle"><input size="3" value="85" /></td>
+                  <td align="center" valign="middle">
+                    <input size="3" value="85" />
+                  </td>
                   <td align="center" valign="middle">99</td>
                   <td align="center" valign="middle">87</td>
                   <td align="center" valign="middle">82</td>
@@ -191,11 +254,17 @@
                 <tr>
                   <td>R2-D2</td>
                   <td align="center" valign="middle">81</td>
-                  <td align="center" valign="middle"><input size="3" value="92" /></td>
-                  <td align="center" valign="middle"><input size="3" value="82" /></td>
+                  <td align="center" valign="middle">
+                    <input size="3" value="92" />
+                  </td>
+                  <td align="center" valign="middle">
+                    <input size="3" value="82" />
+                  </td>
                   <td align="center" valign="middle">86</td>
                   <td align="center" valign="middle">83</td>
-                  <td align="center" valign="middle"><input size="3" value="84" /></td>
+                  <td align="center" valign="middle">
+                    <input size="3" value="84" />
+                  </td>
                   <td align="center" valign="middle">98</td>
                   <td align="center" valign="middle">85</td>
                   <td align="center" valign="middle">96</td>
@@ -230,7 +299,9 @@
                   <td align="center" valign="middle">88</td>
                   <td align="center" valign="middle">95</td>
                   <td align="center" valign="middle">100</td>
-                  <td align="center" valign="middle"><input size="3" value="93" /></td>
+                  <td align="center" valign="middle">
+                    <input size="3" value="93" />
+                  </td>
                   <td align="center" valign="middle">98</td>
                   <td align="center" valign="middle">85</td>
                   <td align="center" valign="middle">87</td>

@@ -1,145 +1,220 @@
 <html>
-    <head></head>
-    <body>
-        <table width="100%">
-            <tbody>
+  <head>
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+    <!-- External FontAwesome CSS link -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css" />
+  </head>
+  <body>
+    <table>
+      <tbody>
+        <tr>
+          <td valign="top">
+            <!-- Main Kanbas Navigation-->
+            <ul class="wd-kanbas-navigation">
+              <li><a href="http://northeastern.edu">N</a></li>
+              <li>
+                <a href="/Kanbas/Account/Profile/screen.html"
+                  ><i class="fa fa-user icon-white"></i><br />Account</a
+                >
+              </li>
+              <li>
+                <a href="/Kanbas/Dashboard/screen.html"
+                  ><i class="fa fa-gauge"></i><br />
+                  Dashboard</a
+                >
+              </li>
+              <li class="wd-active">
+                <a href="/Kanbas/Courses/Home/screen.html"
+                  ><i class="fa fa-book"></i><br />Courses</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-calendar"></i><br />Calendar</a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-inbox"></i><br />Inbox</a>
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-clock"></i><br />History</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fa-brands fa-square-youtube"></i><br />Studio</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fa fa-arrow-up-right-from-square"></i
+                  ><br />Commons</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fa fa-circle-question"></i><br />Help</a>
+              </li>
+            </ul>
+          </td>
+          <td valign="top">
+            <!-- Course Navigation -->
+            <ul class="wd-navigation">
+              <li class="wd-active"><a href="/Kanbas/Courses/Home/screen.html">Home</a></li>
+              <li>
+                <a href="/Kanbas/Courses/Modules/screen.html">Modules</a>
+              </li>
+              <li><a href="http://piazza.com">Piazza</a></li>
+              <li><a href="#">Zoom Meetings</a></li>
+              <li>
+                <a href="/Kanbas/Courses/Assignments/screen.html"
+                  >Assignments</a
+                >
+              </li>
+              <li><a href="#">Quizzes</a></li>
+              <li><a href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
+              <li><a href="#">People</a></li>
+              <li><a href="#">Panopto Video</a></li>
+              <li><a href="#">Discussions</a></li>
+              <li><a href="#">Announcements</a></li>
+              <li><a href="#">Pages</a></li>
+              <li><a href="#">Files</a></li>
+              <li><a href="#">Rubrics</a></li>
+              <li><a href="#">Outcomes</a></li>
+              <li><a href="#">Collaborations</a></li>
+              <li><a href="#">Syllabus</a></li>
+              <li>
+                <a href="/Kanbas/Courses/Settings/screen.html">Settings</a>
+              </li>
+            </ul>
+          </td>
+
+          <td valign="top">
+            <button>Collapse All</button>
+            <button>View Progress</button>
+            <select>
+              <option>Publish All</option>
+              <option>Unpublish All</option>
+              <option>Unpublish All</option>
+            </select>
+            <button>Module</button>
+            <hr />
+            <ul>
+              <li>
+                Week 0 - INTRO
+                <ul>
+                  <li>
+                    LEARNING OBJECTIVES
+                    <ul>
+                      <li>Introduction to the course</li>
+                      <li>Learn what is Web Development</li>
+                      <li>Creating a development environment</li>
+                      <li>Creating a Web Application</li>
+                      <li>Getting started with the 1st assignment</li>
+                    </ul>
+                  </li>
+                  <li>
+                    READING
+                    <ul>
+                      <li>Full Stack Developer - Chapter 1 - Introduction</li>
+                      <li>
+                        Full Stack Developer - Chapter 2 - Creating User
+                        Interfaces With HTML
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    SLIDES
+                    <ul>
+                      <li>
+                        <a href="#"
+                          >Introduction to Web Development Links to an external
+                          site.</a
+                        >
+                      </li>
+                      <li>
+                        <a href="#"
+                          >Creating an HTTP server with Node.js Links to an
+                          external site.</a
+                        >
+                      </li>
+                      <li>
+                        <a href="#"
+                          >Creating a React Application Links to an external
+                          site.</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Week 1 - HTML
+                <ul>
+                  <li>
+                    LEARNING OBJECTIVES
+                    <ul>
+                      <li>Learn how to create user interfaces with HTML</li>
+                      <li>Keep working on assignment 1</li>
+                      <li>Deploy the assignment to Netlify</li>
+                    </ul>
+                  </li>
+                  <li>
+                    READING
+                    <ul>
+                      <li>Full Stack Developer - Chapter 1 - Introduction</li>
+                      <li>
+                        Full Stack Developer - Chapter 2 - Creating User
+                        Interfaces With HTML
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </td>
+
+          <td valign="top">
+            <h4>Course Status</h4>
+            <table>
+              <tbody>
                 <tr>
-                    <td valign="top">
-                        <!-- Main Kanbas Navigation-->
-                        <ul>
-                            <li><a href="/Kanbas/Account/Profile/screen.html">Account</a></li>
-                            <li><a href="/Kanbas/Dashboard/screen.html">Dashboard</a></li>
-                            <li><a href="/Kanbas/Courses/Home/screen.html">Courses</a></li>
-                            <li><a href="#">Calendar</a></li>
-                            <li><a href="#">Inbox</a></li>
-                            <li><a href="#">History</a></li>
-                            <li><a href="#">Studio</a></li>
-                            <li><a href="#">Commons</a></li>
-                            <li><a href="#">Help</a></li>
-                        </ul>
-                    </td>
-                    <td valign="top">
-                        <!-- Course Navigation -->
-                        <ul>
-                            <li><a href="/Kanbas/Courses/Home/screen.html">Home</a></li>
-                            <li><a href="#">Modules</a></li>
-                            <li><a href="#">Piazza</a></li>
-                            <li><a href="#">Zoom Meetings</a></li>
-                            <li><a href="/Kanbas/Courses/Assignments/screen.html">Assignments</a></li>
-                            <li><a href="#">Quizzes</a></li>
-                            <li><a href="/Kanbas/Courses/Grades/screen.html">Grades</a></li>
-                            <li><a href="#">People</a></li>
-                            <li><a href="#">Panopto Video</a></li>
-                            <li><a href="#">Discussions</a></li>
-                            <li><a href="#">Announcements</a></li>
-                            <li><a href="#">Pages</a></li>
-                            <li><a href="#">Files</a></li>
-                            <li><a href="#">Rubrics</a></li>
-                            <li><a href="#">Outcomes</a></li>
-                            <li><a href="#">Collaborations</a></li>
-                            <li><a href="#">Syllabus</a></li>
-                            <li><a href="/Kanbas/Courses/Settings/screen.html">Settings</a></li>
-                        </ul>
-                    </td>
-
-                    <td valign="top">
-                        <button>Collapse All</button>
-                        <button>View Progress</button>
-                        <select>
-                            <option>Publish All</option>
-                            <option>Unpublish All</option>
-                            <option>Unpublish All</option>
-                        </select>
-                        <button>Module</button>
-                        <hr />
-                        <ul>
-                            <li>
-                                Week 0 - INTRO
-                                <ul>
-                                    <li>LEARNING OBJECTIVES
-                                        <ul>
-                                            <li>Introduction to the course</li>
-                                            <li>Learn what is Web Development</li>
-                                            <li>Creating a development environment</li>
-                                            <li>Creating a Web Application</li>
-                                            <li>Getting started with the 1st assignment</li>
-                                        </ul>
-                                    </li>
-                                    <li>READING
-                                        <ul>
-                                            <li>Full Stack Developer - Chapter 1 - Introduction</li>
-                                            <li>Full Stack Developer - Chapter 2 - Creating User Interfaces With
-                                                HTML</li>
-                                        </ul>
-                                    </li>
-                                    <li>SLIDES
-                                        <ul>
-                                            <li><a href="#">Introduction to Web Development Links to an external
-                                                    site.</a></li>
-                                            <li><a href="#">Creating an HTTP server with Node.js Links to an external
-                                                    site.</a></li>
-                                            <li><a href="#">Creating a React Application Links to an external
-                                                    site.</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                Week 1 - HTML
-                                <ul>
-                                    <li>LEARNING OBJECTIVES
-                                        <ul>
-                                            <li>Learn how to create user interfaces with HTML</li>
-                                            <li>Keep working on assignment 1</li>
-                                            <li>Deploy the assignment to Netlify</li>
-                                        </ul>
-                                    </li>
-                                    <li>READING
-                                        <ul>
-                                            <li>Full Stack Developer - Chapter 1 - Introduction</li>
-                                            <li>Full Stack Developer - Chapter 2 - Creating User Interfaces With
-                                                HTML</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </td>
-
-                    <td valign="top">
-                        <h4>Course Status</h4>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <button>Unpublish</button>
-                                    </td>
-                                    <td>
-                                        <button>Publish</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <ul>
-                            <li><a href="#">Import Existing Content</a></li>
-                            <li><a href="#">Import From Commons</a></li>
-                            <li><a href="#">Choose Home Page</a></li>
-                            <li><a href="#">View Course Stream</a></li>
-                            <li><a href="#">New Announcement</a></li>
-                            <li><a href="#">New Analytics</a></li>
-                            <li><a href="#">View Course Notifications</a></li>
-                        </ul>
-
-                        <h4>Comming Up</h4>
-                        <a href="#">View Calendar</a><p>
-                            <uo>
-                                <li><a href="#">Lecture CS4550.1263.202410 Sep 7 at 11:45am</a></li>
-                                <li><a href="#">Lecture CS4550.1263.202410 Sep 11 at 11:45am</a></li>
-                                <li><a href="#">CS5610 06 SP23 Lecture Sep 11 at 6pm</a></li>
-                            </uo>
-                        </td>
-                    </tr>
-                </tbody>
+                  <td>
+                    <button>Unpublish</button>
+                  </td>
+                  <td>
+                    <button>Publish</button>
+                  </td>
+                </tr>
+              </tbody>
             </table>
-        </body>
-    </html>
+            <ul>
+              <li><a href="#">Import Existing Content</a></li>
+              <li><a href="#">Import From Commons</a></li>
+              <li><a href="#">Choose Home Page</a></li>
+              <li><a href="#">View Course Stream</a></li>
+              <li><a href="#">New Announcement</a></li>
+              <li><a href="#">New Analytics</a></li>
+              <li><a href="#">View Course Notifications</a></li>
+            </ul>
+
+            <h4>Comming Up</h4>
+            <a href="#">View Calendar</a>
+            <p>
+              <uo>
+                <li>
+                  <a href="#">Lecture CS4550.1263.202410 Sep 7 at 11:45am</a>
+                </li>
+                <li>
+                  <a href="#">Lecture CS4550.1263.202410 Sep 11 at 11:45am</a>
+                </li>
+                <li><a href="#">CS5610 06 SP23 Lecture Sep 11 at 6pm</a></li>
+              </uo>
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
