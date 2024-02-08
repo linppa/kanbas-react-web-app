@@ -46,6 +46,15 @@
   margin: 2px 0px;
 }
 
+.btn-custom-full {
+  background-color: whitesmoke;
+  border: 1px solid lightgrey;
+  margin: 2px 0px;
+  width: 100%;
+  text-align: left;
+  padding-left: 10px;
+}
+
 .btn-custom-searchbar {
   background-color: white;
   border: 1px solid lightgrey;

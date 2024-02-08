@@ -7,6 +7,9 @@
   height: 200vmax;
   
 }
+
+
+
 .wd-kanbas-navigation li {
   padding: 10px;
   margin-bottom: 10px;
@@ -32,3 +35,39 @@
 .wd-kanbas-navigation a .icon-white {
     color: grey;
   }
+
+.wd-navigation-breadcrumb a {
+  color: red;
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wd-navigation-breadcrumb :hover {
+  text-decoration: underline;
+}
+
+/* Small devices (landscape phones, less than 576px) */
+@media (max-width: small) {
+  .wd-navigation-breadcrumb {
+    background-color: black;
+    color: white;
+  }
+}
+
+
+
+/* .wd-navigation-breadcrumb2 {
+background-color: black;
+color: white;
+padding: 10px;
+} */
+
+
+/* .flex-row-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+} */
+
