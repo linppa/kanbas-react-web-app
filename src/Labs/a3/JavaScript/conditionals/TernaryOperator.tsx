@@ -9,4 +9,4 @@ let loggedIn = true;
     </div>
  )
 }
-export default TernaryOperator
+export default TernaryOperator;
