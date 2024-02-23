@@ -13,4 +13,4 @@ function ArrayIndexAndLength() {
         </>
     )
 }
-export default ArrayIndexAndLength
+export default ArrayIndexAndLength;
