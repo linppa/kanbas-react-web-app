@@ -1,9 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import "./index.css";
-import { FaTachometerAlt, FaRegUserCircle, FaBook, FaRegCalendarAlt, FaInbox, FaClock, FaYoutube, FaArrowUp, FaQuestionCircle, FaArrowCircleRight } from "react-icons/fa";
+import { FaTachometerAlt, FaRegUserCircle, FaBook, FaRegCalendarAlt, FaInbox, FaClock, FaYoutube, FaArrowUp, FaQuestionCircle, FaArrowCircleRight, FaNeos, FaNs8, FaNeuter } from "react-icons/fa";
 
 function KanbasNavigation() {
   const links = [
+    { label: "Northeastern",   icon: <FaNeos className="fs-2" />  },
     { label: "Account",   icon: <FaRegUserCircle className="fs-2" />  },
     { label: "Dashboard", icon: <FaTachometerAlt className="fs-2" />  },
     { label: "Courses",   icon: <FaBook className="fs-2" />           },
