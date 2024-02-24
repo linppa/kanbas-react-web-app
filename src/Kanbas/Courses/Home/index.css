@@ -1,3 +1,12 @@
+/* styling for course status bar */
+
+/* status bar spacing */
+.status-bar {
+    width: 300px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 .wd-modules,
 .wd-modules * {
   border-radius: 0%;
@@ -8,7 +17,6 @@
 
 .wd-modules {
   margin: 5px;
-  overflow-y: auto;
 }
 
 .wd-modules > li {
@@ -72,11 +80,12 @@
   text-align: left;
 }
 
+/* styling ellipses on home */
 .btn-custom-ellipses {
   background-color: whitesmoke;
   border: 1px solid lightgrey;
   margin: 2px 0px;
-  padding: 8px 12px;
+  padding: 5px 10px;
   text-align: center;
 }
 
@@ -126,14 +135,15 @@
   font-size: 10px;
   color: grey;
   text-decoration: none;
-  padding: 14px;
 }
 
-.subtext-assignment {
+/* subtext under the to-do & coming up list */
+.subtext-coming-up,
+.subtext-todo {
   font-size: 10px;
   color: grey;
   text-decoration: none;
-  padding-left: 38px;
+  padding-left: 18px;
 }
 
 .rounded-pill-big {

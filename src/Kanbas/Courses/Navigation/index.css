@@ -1,3 +1,4 @@
+/* course navigation style */
 .wd-navigation {
   background-color: white;
   list-style: none;
@@ -7,6 +8,8 @@
   margin-left: 20px;
   margin-right: 20px;
 }
+
+/* course nav spacing */
 .wd-navigation li {
   padding-left: 10px;
   margin-bottom: 10px;
@@ -14,13 +17,25 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+/* course nav active selection black bar */
 .wd-navigation li.wd-active {
   border-left: 2px solid black;
 }
+
+/* course nav active selection text */
 .wd-navigation li.wd-active a {
   color: black;
 }
+
+/* course nav links red */
 .wd-navigation a {
   color: red;
   text-decoration: none;
+}
+
+/* smaller text on course number */
+.wd-course-number {
+  font-size: 9px;
+  color: rgb(155, 155, 155);
 }

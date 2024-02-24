@@ -3,13 +3,15 @@ import "./index.css";
 import { modules } from "../../Database";
 import { FaEllipsisV, FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import { useParams } from "react-router";
+import { FaFileImport, FaFileExport, FaCrosshairs, FaPlus } from "react-icons/fa";
+
 function ModuleList() {
   const { courseId } = useParams();
   const modulesList = modules.filter((module) => module.course === courseId);
   const [selectedModule, setSelectedModule] = useState(modulesList[0]);
   return (
     <>
-      {/* <!-- Add buttons here --> */}
+      {/* modules list */}
       <ul className="list-group wd-modules">
         {modulesList.map((module, index) => (
           <li key={index}

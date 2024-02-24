@@ -5,7 +5,8 @@
     "number": "RS4550",
     "startDate": "2023-01-10",
     "endDate": "2023-05-15",
-    "image": "leaves.jpeg"
+    "image": "leaves.jpeg",
+    "semester": "Spring 2024"
   },
   {
     "_id": "RS102",
@@ -13,7 +14,8 @@
     "number": "RS4560",
     "startDate": "2023-01-10",
     "endDate": "2023-05-15",
-    "image": "flowers.jpeg"
+    "image": "flowers.jpeg",
+    "semester": "Spring 2024"
   },
   {
     "_id": "RS103",
@@ -21,7 +23,8 @@
     "number": "RS4570",
     "startDate": "2023-01-10",
     "endDate": "2023-05-15",
-    "image": "fruit.jpeg"
+    "image": "fruit.jpeg",
+    "semester": "Spring 2024"
   },
   {
     "_id": "CS5610",
@@ -29,7 +32,8 @@
     "number": "CS5610",
     "startDate": "2023-01-10",
     "endDate": "2023-05-15",
-    "image": "bottle.jpeg"
+    "image": "bottle.jpeg",
+    "semester": "Spring 2024"
   },
   {
     "_id": "CS5200",
@@ -37,7 +41,8 @@
     "number": "CS5200",
     "startDate": "2023-01-10",
     "endDate": "2023-05-15",
-    "image": "dryflower.jpeg"
+    "image": "dryflower.jpeg",
+    "semester": "Spring 2024"
   },
   {
     "_id": "CS5800",
@@ -45,6 +50,7 @@
     "number": "CS5800",
     "startDate": "2023-01-10",
     "endDate": "2023-05-15",
-    "image": "flower.jpeg"
+    "image": "flower.jpeg",
+    "semester": "Spring 2024"
   }
 ]

@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { courses } from "../Database";
+
+/* main dashboard cards page */
 function Dashboard() {
   return (
     <div className="p-4">

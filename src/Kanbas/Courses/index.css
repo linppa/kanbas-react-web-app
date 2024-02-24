@@ -1,0 +1,30 @@
+/* breadcrumb color & style */
+.course-breadcrumb {
+  color: red;
+  font-size: 13px;
+  padding: 15px;
+  position: static;
+}
+
+/* margins for horizontal bar */
+.horizontal-line {
+  color: grey;
+  margin: 10px;
+}
+
+/* links red color */
+.link {
+  color: red;
+  text-decoration: none;
+}
+
+/* underline when hovering link */
+.link:hover {
+  text-decoration: underline;
+}
+
+/* make the hamburger size larger */
+.icon-large {
+  font-size: 16px;
+  margin: 5px;
+}

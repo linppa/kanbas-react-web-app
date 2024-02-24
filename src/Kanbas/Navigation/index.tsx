@@ -1,7 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
+import { FaTachometerAlt, FaRegUserCircle, FaBook, FaRegCalendarAlt, FaInbox, FaClock, FaYoutube, FaQuestionCircle, FaArrowCircleRight, FaNeos} from "react-icons/fa";
 import "./index.css";
-import { FaTachometerAlt, FaRegUserCircle, FaBook, FaRegCalendarAlt, FaInbox, FaClock, FaYoutube, FaArrowUp, FaQuestionCircle, FaArrowCircleRight, FaNeos, FaNs8, FaNeuter } from "react-icons/fa";
+import "../../Kanbas/styles.css";
 
+
+/* main black navigation bar */
 function KanbasNavigation() {
   const links = [
     { label: "Northeastern",   icon: <FaNeos className="fs-2" />  },
@@ -14,14 +17,14 @@ function KanbasNavigation() {
     { label: "Studio",    icon: <div><FaYoutube className="fs-2" /></div>},
     { label: "Commons",   icon: <div><FaArrowCircleRight className="fs-2" /></div>},
     { label: "Help",      icon: <div><FaQuestionCircle className="fs-2" /></div>}
-
   ];
+
   const { pathname } = useLocation();
   return (
     <ul className="wd-kanbas-navigation">
       {links.map((link, index) => (
         <li key={index} className={pathname.includes(link.label) ? "wd-active" : ""}>
-          <Link to={`/Kanbas/${link.label}`}> {link.icon} {link.label} </Link>
+          <Link to={`/Kanbas/${link.label}`}> {link.icon} <span className="nav-label">{link.label}</span> </Link>
         </li>
       ))}
     </ul>
