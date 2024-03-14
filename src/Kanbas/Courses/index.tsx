@@ -12,9 +12,9 @@ import "./index.css";
 import { FaGlasses } from "react-icons/fa";
 
 {/* main course page */}
-function Courses() {
+function Courses({ courses }: { courses: any[]; }) {
   const { courseId } = useParams();
-  const course = courses.find((course) => course._id === courseId);
+  const course = courses.find((course) => course._id === courseId); 
 
   const { pathname } = useLocation();
   const courseBasePath = `/Kanbas/Courses/${courseId}/Home`;

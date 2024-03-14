@@ -1,0 +1,19 @@
+.btn.btn-danger {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.btn.btn-primary {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.btn.grey {
+    background-color: gainsboro;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.btn.grey:hover {
+    background-color: rgb(179, 179, 179);
+}
