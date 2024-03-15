@@ -4,43 +4,51 @@ import { modules } from "../../Database";
 import { FaEllipsisV, FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import { useParams } from "react-router";
 
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addModule,
+  deleteModule,
+  updateModule,
+  setModule,
+} from "./reducer";
+import { KanbasState } from "../../store";
+
+
 function ModuleList() {
   const { courseId } = useParams();
   const modulesList = modules.filter((module) => module.course === courseId);
   const [selectedModule, setSelectedModule] = useState(modulesList[0]);
 
-  const [moduleList, setModuleList] = useState<any[]>(modules);
-  const [module, setModule] = useState({
-    _id: "0",
-    name: "New Module",
-    description: "New Description",
-    course: courseId || "",
-  });
-  const addModule = (module: any) => {
-    const newModule = { ...module,
-      _id: new Date().getTime().toString() };
-    const newModuleList = [newModule, ...moduleList];
-    setModuleList(newModuleList);
-  };
+  const moduleList = useSelector((state: KanbasState) =>
+    state.modulesReducer.modules);
+  const module = useSelector((state: KanbasState) =>
+    state.modulesReducer.module);
+  const dispatch = useDispatch();
+
 
   return (
     <>
       {/* add modules list */}
       <ul className="list-group wd-modules">
-        <li className="module-form-container">
+        <li className="list-group-item module-form-container">
+
           {/* add module button */}
-          <button className="btn btn-success add" onClick={() => { addModule(module) }}>Add</button>
+          <button className="btn btn-success add" onClick={() => dispatch(addModule({ ...module, course: courseId }))}>Add</button>
+
+          {/* update module button */}
+          <button className="btn btn-primary update" onClick={() => dispatch(updateModule(module))}>
+            Update
+          </button>
+
+          {/* input module name */}
           <input className="module-input" value={module.name}
-            onChange={(e) => setModule({
-              ...module, name: e.target.value
-            })}
-          />
+            onChange={(e) => dispatch(setModule({ ...module, name: e.target.value }))
+          }/>
+
           {/* add module description */}
           <textarea className="module-textarea" value={module.description}
-            onChange={(e) => setModule({
-              ...module, description: e.target.value
-            })}
-          />
+            onChange={(e) => dispatch(setModule({ ...module, description: e.target.value }))
+          }/>
         </li>
 
         {/* list existing modules */}
@@ -48,6 +56,17 @@ function ModuleList() {
           .filter((module) => module.course === courseId)
           .map((module, index) => (
             <li key={index} className="list-group-item">
+              {/* edit button */}
+              <button className="btn btn-success edit"
+                onClick={() => dispatch(setModule(module))}>
+                Edit
+              </button>
+
+              {/* delete button */}
+              <button className="btn btn-danger delete"
+                onClick={() => dispatch(deleteModule(module._id))}>
+                Delete
+              </button>
 
               {/* check, plus, elips icons */}
               <div>
