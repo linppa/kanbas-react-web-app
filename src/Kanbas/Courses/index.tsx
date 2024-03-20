@@ -23,8 +23,17 @@ function Courses({ courses }: { courses: any[]; }) {
     <div>
       {/* breadcrumb top bar */}
       <div className="course-breadcrumb">
-        <HiMiniBars3 className="icon-large" /> <Link className="link" to ={courseBasePath}> {course?.number} {course?.name}</Link> {" > "} {pathname.split("/").pop()}
-
+        {/* if assignment editor page */}
+        {pathname.includes("Assignments") ? (
+          <>
+            <HiMiniBars3 className="icon-large" /> <Link className="link" to={courseBasePath}> {course?.number} {course?.name}</Link> {" > "} <Link className="link" to={`${courseBasePath}/Assignments`}> Assignments</Link> {" > "} {pathname.split("/").pop()}
+          </>
+        ) : (
+          <>
+            <HiMiniBars3 className="icon-large" /> <Link className="link" to={courseBasePath}> {course?.number} {course?.name}</Link> {" > "} {pathname.split("/").pop()}
+          </>
+        )}
+      
         <button className="btn btn-outline-secondary btn-custom float-end" style={{marginRight: "15px"}}>
           <FaGlasses /> Student View
         </button>
