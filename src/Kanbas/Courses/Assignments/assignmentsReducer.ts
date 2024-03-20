@@ -3,9 +3,9 @@ import { assignments } from "../../Database";
 
 const initialState = {
     assignments: assignments, // default assignment from database
-    assignment: { "title": "New Assignment", "dueDate": "Sep 18 at 11:59pm", "points": "Points"}, // default assignment
-    };
-const assignmentsSlice = createSlice({ // create slice
+    assignment: { "title": "New Assignment Name", "dueDate": "Due Date & Time", "points": "Points" }, // default assignment format
+};
+const assignmentsSlice = createSlice({
     name: "assignments",
     initialState,
     reducers: {
@@ -36,5 +36,5 @@ const assignmentsSlice = createSlice({ // create slice
     },
 });
 
-export const { addAssignment, deleteAssignment, updateAssignment, selectAssignment} = assignmentsSlice.actions;
+export const { addAssignment, deleteAssignment, updateAssignment, selectAssignment } = assignmentsSlice.actions;
 export default assignmentsSlice.reducer;

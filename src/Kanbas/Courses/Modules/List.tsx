@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./modules.css";
 import { modules } from "../../Database";
 import { FaEllipsisV, FaCheckCircle, FaPlusCircle } from "react-icons/fa";
@@ -64,7 +64,15 @@ function ModuleList() {
 
               {/* delete button */}
               <button className="btn btn-danger delete"
-                onClick={() => dispatch(deleteModule(module._id))}>
+                onClick={(event) => {
+                  event.preventDefault();
+                  // warning message before deleting
+                  const confirmation = window.confirm("Are you sure you want to delete module?");
+                  if (confirmation) {
+                    dispatch(deleteModule(module._id));
+                  }
+                }
+                }>
                 Delete
               </button>
 

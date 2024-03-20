@@ -1,16 +1,77 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { assignments } from "../../../Database";
 import { FaCheckCircle, FaEllipsisV } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { addAssignment, updateAssignment } from "../assignmentsReducer";
+import { KanbasState } from "../../../store";
 
 function AssignmentEditor() {
+  const { courseId } = useParams();
   const { assignmentId } = useParams();
-  const assignment = assignments.find((a) => a._id === assignmentId);
+  const assignment = useSelector((state: KanbasState) =>
+    state.assignmentsReducer.assignments.find((a) => a._id === assignmentId)
+  );
 
   const smallContainerStyle = {
     maxWidth: "70%",
     margin: "0 auto",
   };
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // form fields
+  const [assignmentName, setAssignmentName] = useState("");
+  const [description, setDescription] = useState("");
+  const [points, setPoints] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [availableFromDate, setAvailableFromDate] = useState("");
+  const [availableUntil, setAvailableUntil] = useState("");
+
+  // get assignment data if exists
+  useEffect(() => {
+    if (assignment) {
+      setAssignmentName(assignment.title);
+      setDescription(assignment.description || "");
+      setPoints(assignment.points || "");
+      setDueDate(assignment.dueDate || "");
+      setAvailableFromDate(assignment.availableFromDate || "");
+      setAvailableUntil(assignment.availableUntil || "");
+    }
+  }, [assignment]);
+
+  // handle form save
+  const handleSave = () => {
+    if (assignment) {
+      dispatch(
+        updateAssignment({
+          ...assignment,
+          title: assignmentName,
+          description: description,
+          points: points,
+          dueDate: dueDate,
+          availableFromDate: availableFromDate,
+          availableUntil: availableUntil,
+        })
+      );
+    } else
+      dispatch(addAssignment({
+        title: assignmentName,
+        description: description,
+        points: points,
+        dueDate: dueDate,
+        availableFromDate: availableFromDate,
+        availableUntil: availableUntil,
+      }));
+
+    navigate(`/Kanbas/Courses/${courseId}/Assignments`);
+  };
+
+  // handle cancel
+  const handleCancel = () => {
+    navigate(`/Kanbas/Courses/${courseId}/Assignments`);
+  }
 
   return (
     <div className="container mt-3">
@@ -49,8 +110,9 @@ function AssignmentEditor() {
             type="text"
             className="form-control"
             id="assignmentName"
+            value={assignmentName}
             defaultValue={assignment ? assignment.title : ""}
-            readOnly
+            onChange={(e) => setAssignmentName(e.target.value)}
           />
         </div>
 
@@ -64,7 +126,7 @@ function AssignmentEditor() {
             id="assignmentDescription"
             rows={3}
             placeholder="Description here..."
-            readOnly
+            onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </div>
 
@@ -80,29 +142,8 @@ function AssignmentEditor() {
               className="form-control"
               id="points"
               defaultValue={assignment ? assignment.points : ""}
-              readOnly
+              onChange={(e) => setPoints(e.target.value)}
             />
-          </div>
-
-          {/* assignment group drop-down*/}
-          <div className="mb-3">
-            <label className="form-label">Assignment Group</label>
-            <select className="form-select" id="assignmentGroup">
-              <option> </option>
-              <option>Group 1</option>
-              <option>Group 2</option>
-              <option>Group 3</option>
-            </select>
-          </div>
-
-          {/* display grade as, drop down */}
-          <div className="mb-3">
-            <label className="form-label">Display Grade As</label>
-            <select className="form-select" id="displayGradeAs">
-              <option>Percentage</option>
-              <option>Points</option>
-              <option>Complete/Incomplete</option>
-            </select>
           </div>
 
           {/* due date */}
@@ -115,31 +156,57 @@ function AssignmentEditor() {
               className="form-control"
               id="dueDate"
               defaultValue={assignment ? assignment.dueDate : ""}
-              readOnly
+              onChange={(e) => setDueDate(e.target.value)}
             />
-            </div>
+          </div>
 
+          {/* available from date */}
+          <div className="mb-3">
+            <label htmlFor="availableFromDate" className="form-label">
+              Available From
+            </label>
+            <input
+              type="date"
+              className="form-control"
+              id="availableFromDate"
+              onChange={(e) => setDueDate(e.target.value)}
+            />
+          </div>
+
+          {/* available until */}
+          <div className="mb-3">
+            <label htmlFor="availableUntil" className="form-label">
+              Available Until
+            </label>
+            <input
+              type="date"
+              className="form-control"
+              id="availableUntil"
+              onChange={(e) => setDueDate(e.target.value)}
+            />
+          </div>
         </div>
 
         {/* cancel & save */}
         <div
           className="d-flex justify-content-end"
-          style={{ marginLeft: "auto", padding: 5 }}
-        >
-          <button style={{ marginRight: 10 }}
+          style={{ marginLeft: "auto", padding: 5 }}>
+
+          {/* cancel */}
+          <button onClick={handleCancel}
+            style={{ marginRight: 10 }}
             type="button"
-            className="btn btn-outline-secondary btn-custom"
-          >
+            className="btn btn-outline-secondary btn-custom">
             Cancel
           </button>
-          <button
+
+          {/* save button */}
+          <button onClick={handleSave}
             type="button"
-            className="btn btn-outline-secondary btn-custom-module"
-          >
+            className="btn btn-outline-secondary btn-custom-module">
             Save
           </button>
           <br />
-          
         </div>
       </form>
     </div>

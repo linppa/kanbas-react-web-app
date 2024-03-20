@@ -1,7 +1,4 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { courses } from "../Database";
-import * as db from "../Database";
 import "./dashboard.css";
 
 function Dashboard(
@@ -48,7 +45,7 @@ function Dashboard(
 
               <div className="card">
                 <img src={`/images/${course.image}`} className="card-img-top"
-                  style={{ height: 150 }} />
+                  style={{ height: 150 }} alt="..." />
 
                 <div className="card-body">
                   <Link className="card-title" to={`/Kanbas/Courses/${course._id}/Home`}
@@ -60,28 +57,33 @@ function Dashboard(
 
                   {/* go button */}
                   <span style={{ float: "left" }}>
-                  <Link to={`/Kanbas/Courses/${course._id}/Home`} className="btn btn-primary">
-                    Go </Link>
+                    <Link to={`/Kanbas/Courses/${course._id}/Home`} className="btn btn-primary">
+                      Go </Link>
                   </span>
 
                   <span style={{ float: "right" }}>
-                  {/* edit button */}
-                  <button className="btn grey" onClick={(event) => {
-                    event.preventDefault();
-                    setCourse(course);
-                  }}>
-                    Edit
-                  </button>
+                    {/* edit button */}
+                    <button className="btn grey" onClick={(event) => {
+                      event.preventDefault();
+                      setCourse(course);
+                    }}>
+                      Edit
+                    </button>
 
-                  {/* delete button */}
-                  <button className="btn btn-danger" onClick={(event) => {
-                    event.preventDefault();
-                    deleteCourse(course._id);
-                  }}>
-                    Delete
-                  </button>
+                    {/* delete button */}
+                    <button className="btn btn-danger" onClick={(event) => {
+                      event.preventDefault();
+                      // warning message before deleting
+                      const confirmation = window.confirm("Are you sure you want to delete course?");
+                      // if user confirms, delete course
+                      if (confirmation) {
+                        deleteCourse(course._id);
+                      }
+                    }}>
+                      Delete
+                    </button>
+
                   </span>
-
                 </div>
               </div>
             </div>

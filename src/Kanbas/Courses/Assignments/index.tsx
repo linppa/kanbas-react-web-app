@@ -1,14 +1,25 @@
 import AssignmentList from "./assignmentList";
 import { FaPlus, FaEllipsisV } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router";
+import { useSelector } from "react-redux";
+import { KanbasState } from "../../store";
 
 
 function Assignments() {
+  const { courseId } = useParams();
+
+  const assignment = useSelector((state: KanbasState) =>
+    state.assignmentsReducer.assignment
+  );
+
   return (
     <div>
       <div className="d-flex justify-content-between mb-3" style={{ padding: "10px" }}>
         <input
           type="search"
           className="form-control btn-custom-searchbar"
+          style={{ width: "50%" }}
           placeholder="Search for Assignments"
         />
         <div>
@@ -17,9 +28,13 @@ function Assignments() {
           </button>
 
           {/* add assignment button */}
-          <button className="btn btn-outline-secondary btn-custom-module">
-            <FaPlus /> Assignment
-          </button>
+          <Link
+            to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}>
+            {/* link to edit/add new assignment */}
+            <button className="btn btn-outline-secondary btn-custom-module">
+              <FaPlus /> Assignment
+            </button>
+          </Link>
 
           <button className="btn btn-outline-secondary btn-custom-ellipses">
             <FaEllipsisV />
@@ -28,7 +43,7 @@ function Assignments() {
       </div>
       <hr className="horizontal-line"></hr>
 
-      {/* ASSIGNMENT LIST */ }
+      {/* ASSIGNMENT LIST */}
       <AssignmentList />
     </div>
   );
