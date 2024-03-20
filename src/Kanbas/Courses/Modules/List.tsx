@@ -28,7 +28,7 @@ function ModuleList() {
 
   return (
     <>
-      {/* add modules list */}
+      {/* FORM TO ADD MODULE */}
       <ul className="list-group wd-modules">
         <li className="list-group-item module-form-container">
 
