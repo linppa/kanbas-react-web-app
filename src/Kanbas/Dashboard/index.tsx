@@ -4,40 +4,6 @@ import { courses } from "../Database";
 import * as db from "../Database";
 import "./dashboard.css";
 
-/* main dashboard cards page */
-// function Dashboard() {
-//   const [courses, setCourses] = useState(db.courses);
-
-//   const [course, setCourse] = useState({
-//     _id: "0", name: "New Course", number: "New Number",
-//     startDate: "2023-09-10", endDate: "2023-12-15",
-//     image: "field.jpeg",
-//     semester: "Spring 2024"
-//   });
-
-//   const updateCourse = () => {
-//     setCourses(
-//       courses.map((c) => {
-//         if (c._id === course._id) {
-//           return course;
-//         } else {
-//           return c;
-//         }
-//       })
-//     );
-//   };
-
-//   const addNewCourse = () => {
-//     const newCourse = {
-//       ...course,
-//       _id: new Date().getTime().toString()
-//     };
-//     setCourses([...courses, { ...course, ...newCourse }]);
-//   };
-//   const deleteCourse = (courseId: string) => {
-//     setCourses(courses.filter((course) => course._id !== courseId));
-//   };
-
 function Dashboard(
   { courses, course, setCourse, addNewCourse,
     deleteCourse, updateCourse }: {
@@ -88,30 +54,35 @@ function Dashboard(
                   <Link className="card-title" to={`/Kanbas/Courses/${course._id}/Home`}
                     style={{ textDecoration: "none", color: "navy", fontWeight: "bold" }}>
                     {course.name}
-
-                    {/* edit button */}
-                    <button className="btn grey" onClick={(event) => {
-                      event.preventDefault();
-                      setCourse(course);
-                    }}>
-                      Edit
-                    </button>
-
-                    {/* delete button */}
-                    <button className="btn btn-danger" onClick={(event) => {
-                      event.preventDefault();
-                      deleteCourse(course._id);
-                    }}>
-                      Delete
-                    </button>
                   </Link>
+                  <p className="card-text">{course.number}</p>
+                  <br />
 
                   {/* go button */}
-                  <p className="card-text">{course.name}</p>
+                  <span style={{ float: "left" }}>
                   <Link to={`/Kanbas/Courses/${course._id}/Home`} className="btn btn-primary">
                     Go </Link>
-                </div>
+                  </span>
 
+                  <span style={{ float: "right" }}>
+                  {/* edit button */}
+                  <button className="btn grey" onClick={(event) => {
+                    event.preventDefault();
+                    setCourse(course);
+                  }}>
+                    Edit
+                  </button>
+
+                  {/* delete button */}
+                  <button className="btn btn-danger" onClick={(event) => {
+                    event.preventDefault();
+                    deleteCourse(course._id);
+                  }}>
+                    Delete
+                  </button>
+                  </span>
+
+                </div>
               </div>
             </div>
           ))}
