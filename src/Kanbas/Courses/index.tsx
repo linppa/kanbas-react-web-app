@@ -24,7 +24,7 @@ function Courses({ courses }: { courses: any[]; }) {
       {/* breadcrumb top bar */}
       <div className="course-breadcrumb">
         {/* if assignment editor page */}
-        {pathname.includes("Assignments") ? (
+        {pathname.includes("Assignments/") ? (
           <>
             <HiMiniBars3 className="icon-large" /> <Link className="link" to={courseBasePath}> {course?.number} {course?.name}</Link> {" > "} <Link className="link" to={`${courseBasePath}/Assignments`}> Assignments</Link> {" > "} {pathname.split("/").pop()}
           </>
