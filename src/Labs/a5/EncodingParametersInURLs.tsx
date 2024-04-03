@@ -1,18 +1,60 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function EncodingParametersInURLs() {
     const [a, setA] = useState(34);
     const [b, setB] = useState(23);
 
+    // using axios
+    const [welcome, setWelcome] = useState('');
+    const fetchWelcome = async () => {
+        const response = await axios.get('http://localhost:4000/a5/welcome');
+        setWelcome(response.data);
+    };
+    useEffect(() => {
+        fetchWelcome();
+    }, []);
+
+    const [result, setResult] = useState(0);
+    const fetchSum = async (a: number, b: number) => {
+        const response = await
+            axios.get(`http://localhost:4000/a5/add/${a}/${b}`);
+        setResult(response.data);
+    };
+    const fetchSubtraction = async (a: number, b: number) => {
+        const response = await
+            axios.get(`http://localhost:4000/a5/subtract/${a}/${b}`);
+        setResult(response.data);
+    };
+
+
     return (
         <div>
             {/* 3.1.1 path parameters */}
             <h3> Encoding Parameters in URLs </h3>
+
+            {/* using AJAX (axios) */}
+            <h4> Integrating React with APIs </h4>
+            <h5> Fetching Welcome </h5>
+            <h6> {welcome} </h6>
+
             <h4> Calculator </h4>
             <input className="form-control" type="number" value={a}
                 onChange={(e) => setA(Number(e.target.value))} />
             <input className="form-control" type="number" value={b}
                 onChange={(e) => setB(Number(e.target.value))} />
+
+            {/* axios allows the object to be updated without navigating away from UI screen */}
+            <input value={result} type='number' readOnly className="form-control" />
+            <h3> Fetch Result</h3>
+            <button className="btn btn-primary"
+                onClick={() => fetchSum(a, b)}>
+                Fetch Sum of {a} + {b}
+            </button>
+            <button className="btn btn-danger"
+                onClick={() => fetchSubtraction(a, b)}>
+                    Fetch Subtraction of {a} - {b}
+            </button>
 
             <h3> Path Parameters </h3>
             {/* add */}
@@ -54,6 +96,7 @@ function EncodingParametersInURLs() {
                 href={`http://localhost:4000/a5/calculator?operation=divide&a=${a}&b=${b}`}>
                 Divide {a} / {b}
             </a>
+
 
         </div>
     );

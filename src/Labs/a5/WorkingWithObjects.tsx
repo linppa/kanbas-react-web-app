@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function WorkingWithObjects() {
     // 3.2.3 modyfing assignment object in the server
@@ -19,6 +20,20 @@ function WorkingWithObjects() {
         description: 'Learn NodeJS with ExpressJS',
         course: 'Web Development',
     });
+
+    // 3.4.4 fetching & updating objects w axios
+    const fetchAssignment = async () => {
+        const response = await axios.get(`${ASSIGNMENT_URL}`);
+        setAssignment(response.data);
+    };
+    const updateTitle = async () => {
+        const response = await axios
+            .get(`${ASSIGNMENT_URL}/title/${assignment.title}`);
+        setAssignment(response.data);
+    };
+    useEffect(() => {
+        fetchAssignment();
+    }, []);
 
     return (
         <div>
@@ -47,9 +62,13 @@ function WorkingWithObjects() {
                     })}
                     value={assignment.title} />
                 {/* update title button */}
-                <a href={`${ASSIGNMENT_URL}/title/${assignment.title}`}>
-                    <button className="btn btn-primary"> Update Assignment Title </button>
-                </a>
+                <button onClick={updateTitle} className="btn btn-primary">
+                    Update Assignment Title to: {assignment.title}
+                </button>
+                <button onClick={fetchAssignment} className="btn btn-primary">
+                    Fetch Assignment
+                </button>
+                
             </div><br /><br />
 
             {/* ----- MODULE OBJECT ----- */}
