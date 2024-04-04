@@ -12,8 +12,6 @@ import { Provider } from "react-redux";
 /* links to the main pages */
 function Kanbas() {
   // using axios
-
-
   const COURSES_API = "http://localhost:4000/api/courses";
 
   const findAllCourses = async () => {
@@ -58,21 +56,6 @@ function Kanbas() {
     setCourses(courses.filter(
       (c) => c._id !== courseId));
   };
-
-  // const updateCourse = () => {
-  //   setCourses(
-  //     courses.map((c) => {
-  //       if (c._id === course._id) {
-  //         return course;
-  //       } else {
-  //         return c;
-  //       }
-  //     })
-  //   );
-  // };
-
-
-
 
   return (
     <Provider store={store}>
