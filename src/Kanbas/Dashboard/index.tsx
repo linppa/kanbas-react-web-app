@@ -14,11 +14,7 @@ function Dashboard(
     <div className="p-4">
       <div>
         <h1>Dashboard</h1><hr />
-        {/* editing menus for dashboard courses */}
         <h4>Course</h4>
-        {/* show course id */}
-        <input readOnly value={course._id} className="form-control" placeholder="Course ID"
-          onChange={(e) => setCourse({ ...course, _id: e.target.value })} />
         <input value={course.name} className="form-control"
           onChange={(e) => setCourse({ ...course, name: e.target.value })} />
         <input value={course.number} className="form-control"
