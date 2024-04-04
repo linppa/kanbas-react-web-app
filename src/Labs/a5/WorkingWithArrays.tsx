@@ -37,37 +37,92 @@ function WorkingWithArrays() {
         setTodos(response.data);
     };
 
+    // catch errors
+    const [errorMessage, setErrorMessage] = useState(null);
+
+
+    // using HTTP POST
+    const postTodo = async () => {
+        const response = await axios.post(API, todo);
+        setTodos([...todos, response.data]);
+    };
+    const deleteTodo = async (todo: any) => {
+        try {
+            const response = await axios.delete(`${API}/${todo.id}`);
+            setTodos(todos.filter((t) => t.id !== todo.id));
+        } catch (error: any) {
+            console.log(error);
+            setErrorMessage(error.response.data.message);
+        }
+    };
+    const updateTodo = async () => {
+        try {
+            const response = await axios.put(`${API}/${todo.id}`, todo);
+            setTodos(todos.map((t) => (t.id === todo.id ? todo : t)));
+        } catch (error: any) {
+            console.log(error);
+            setErrorMessage(error.response.data.message);
+        }
+    };
+
+
     return (
         <div>
             <h3> Working with Arrays </h3>
+            {errorMessage && (
+                <div className="alert alert-danger mb-2 mt-2" style={{ width: 300 }}>
+                    {errorMessage}
+                </div>
+            )}
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {/* fetching todo list using axios */}
-            <input value={todo.id} type='number' className='form-control' style={{ marginBottom: 5, width: 300 }}
-                onChange={(e) => setTodo({ ...todo, id: Number(e.target.value) })}
-            />
-            <input value={todo.title} type='text' className='form-control' style={{ marginBottom: 5, width: 300 }}
-                onChange={(e) => setTodo({ ...todo, title: e.target.value })}
-            />
-            <button onClick={createTodo} className='btn btn-primary' style={{ marginBottom: 5, width: 300, marginLeft: 0 }}>
-                Create Todo
-            </button>
-            <button onClick={updateTitle} className='btn btn-success' style={{ marginBottom: 5, width: 300 }}>
-                Update Title
-            </button>
-            <ul className='list-group' style={{ width: 300 }}>
-                {todos.map((todo) => (
-                    <li key={todo.id} className='list-group-item'>
-                        {todo.title}
-                        <button onClick={() => removeTodo(todo)} 
-                            className='btn btn-danger' style={{ float: 'right' }}>
-                            Remove
-                        </button>
-                        <button onClick={() => fetchTodoById(todo.id)} className='btn btn-warning' style={{ float: 'right' }}>
-                            Edit
-                        </button>
-                    </li>
-                ))}
-            </ul>
+                {/* fetching todo list using axios */}
+                <input value={todo.id} type='number' className='form-control' style={{ marginBottom: 5, width: 300 }}
+                    onChange={(e) => setTodo({ ...todo, id: Number(e.target.value) })}
+                />
+                <input value={todo.title} type='text' className='form-control' style={{ marginBottom: 5, width: 300 }}
+                    onChange={(e) => setTodo({ ...todo, title: e.target.value })}
+                />
+                <textarea value={todo.description} className='form-control' style={{ marginBottom: 5, width: 300 }}
+                    onChange={(e) => setTodo({ ...todo, description: e.target.value })}
+                />
+                <input value={todo.due} type='date' className='form-control' style={{ marginBottom: 5, width: 300 }}
+                    onChange={(e) => setTodo({ ...todo, due: e.target.value })}
+                />
+                <label>
+                    <input type='checkbox' checked={todo.completed} className='form-check-input' style={{ margin: 5 }}
+                        onChange={(e) => setTodo({ ...todo, completed: e.target.checked })}
+                    />
+                    Completed
+                </label>
+                <button onClick={postTodo} className='btn btn-warning' style={{ marginBottom: 5, width: 300 }}>
+                    Post Todo
+                </button>
+                <button onClick={updateTodo} className='btn btn-info' style={{ marginBottom: 5, width: 300 }}>
+                    Update Todo
+                </button>
+                <button onClick={createTodo} className='btn btn-primary' style={{ marginBottom: 5, width: 300, marginLeft: 0 }}>
+                    Create Todo
+                </button>
+                <button onClick={updateTitle} className='btn btn-success' style={{ marginBottom: 5, width: 300 }}>
+                    Update Title
+                </button>
+                <ul className='list-group' style={{ width: 300 }}>
+                    {todos.map((todo) => (
+                        <li key={todo.id} className='list-group-item'>
+                            <input type='checkbox' checked={todo.completed} readOnly />
+                            {todo.title}
+                            <p>{todo.description}</p>
+                            <p> {todo.due}</p>
+                            <button onClick={() => deleteTodo(todo)}
+                                className='btn btn-danger' style={{ float: 'right' }}>
+                                Delete
+                            </button>
+                            <button onClick={() => fetchTodoById(todo.id)} className='btn btn-warning' style={{ float: 'right' }}>
+                                Edit
+                            </button>
+                        </li>
+                    ))}
+                </ul>
             </div><br />
 
             <h4> Retrieving Arrays </h4>
@@ -134,7 +189,7 @@ function WorkingWithArrays() {
             <h3> Update Todo Completion Status </h3>
             <div style={{ display: 'flex' }}>
                 {/* checkbox checked means completed, left uncheck means uncompleted*/}
-                <input type="checkbox" className="form-check-input" style={{ transform: 'scale(2)', margin: 15}}
+                <input type="checkbox" className="form-check-input" style={{ transform: 'scale(2)', margin: 15 }}
                     checked={todo.completed}
                     onChange={(e) => setTodo({ ...todo, completed: e.target.checked })}
                 />
