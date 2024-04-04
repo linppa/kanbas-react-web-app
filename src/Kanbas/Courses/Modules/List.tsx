@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./modules.css";
 import { modules } from "../../Database";
 import { FaEllipsisV, FaCheckCircle, FaPlusCircle } from "react-icons/fa";
@@ -10,12 +10,20 @@ import {
   deleteModule,
   updateModule,
   setModule,
+  setModules
 } from "./reducer";
+import * as client from "./client";
 import { KanbasState } from "../../store";
 
 
 function ModuleList() {
   const { courseId } = useParams();
+
+  useEffect(() => {
+    client.findModulesForCourse(courseId ?? "")
+      .then((modules) => dispatch(setModules(modules)));
+  }, [courseId]);
+
   const modulesList = modules.filter((module) => module.course === courseId);
   const [selectedModule, setSelectedModule] = useState(modulesList[0]);
 
