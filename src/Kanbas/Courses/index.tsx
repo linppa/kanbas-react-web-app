@@ -10,11 +10,24 @@ import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
 import "./index.css";
 import { FaGlasses } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 {/* main course page */}
-function Courses({ courses }: { courses: any[]; }) {
+function Courses() {
   const { courseId } = useParams();
-  const course = courses.find((course) => course._id === courseId); 
+  const COURSES_API = "http://localhost:4000/api/courses";
+  // const course = courses.find((course) => course._id === courseId); 
+  const [course, setCourse] = useState<any>({ _id: "" });
+  const findCourseById = async (courseId?: string) => {
+    const response = await axios.get(
+      `${COURSES_API}/${courseId}`
+    );
+    setCourse(response.data);
+  };
+  useEffect(() => {
+    findCourseById(courseId);
+  }, [courseId]);
 
   const { pathname } = useLocation();
   const courseBasePath = `/Kanbas/Courses/${courseId}/Home`;
