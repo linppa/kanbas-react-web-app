@@ -43,6 +43,13 @@ function ModuleList() {
   //   state.modulesReducer.module);
   // const dispatch = useDispatch();
 
+  // handle update module
+  const handleUpdateModule = async () => {
+    const status = await client.updateModule(module);
+    dispatch(updateModule(module));
+  };
+
+
   // handle add module to server
   const handleAddModule = () => {
     client.createModule(courseId ?? "", module).then((module) => {
@@ -71,7 +78,7 @@ function ModuleList() {
 
           {/* update module button */}
           <button className="btn btn-primary update"
-            onClick={() => dispatch(updateModule(module))}>
+            onClick={handleUpdateModule}>
             Update
           </button>
 
