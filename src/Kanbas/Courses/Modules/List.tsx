@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./modules.css";
-import { modules } from "../../Database";
+// import { modules } from "../../Database";
 import { FaEllipsisV, FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import { useParams } from "react-router";
 
@@ -24,14 +24,38 @@ function ModuleList() {
       .then((modules) => dispatch(setModules(modules)));
   }, [courseId]);
 
-  const modulesList = modules.filter((module) => module.course === courseId);
-  const [selectedModule, setSelectedModule] = useState(modulesList[0]);
+  // const modulesList = modules.filter((module: any) => module.course === courseId);
+  // const [selectedModule, setSelectedModule] = useState(modulesList[0]);
 
-  const moduleList = useSelector((state: KanbasState) =>
-    state.modulesReducer.modules);
-  const module = useSelector((state: KanbasState) =>
-    state.modulesReducer.module);
+  const moduleList = useSelector(
+    (state: KanbasState) => state.modulesReducer.modules
+  );
+  const module = useSelector(
+    (state: KanbasState) => state.modulesReducer.module
+  );
   const dispatch = useDispatch();
+
+  const [selectedModule, setSelectedModule] = useState(moduleList[0]);
+
+  // const moduleList = useSelector((state: KanbasState) =>
+  //   state.modulesReducer.modules);
+  // const module = useSelector((state: KanbasState) =>
+  //   state.modulesReducer.module);
+  // const dispatch = useDispatch();
+
+  // handle add module to server
+  const handleAddModule = () => {
+    client.createModule(courseId ?? "", module).then((module) => {
+      dispatch(addModule(module));
+    });
+  };
+
+  // handle delete module from server
+  const handleDeleteModule = (moduleId: string) => {
+    client.deleteModule(moduleId).then((status) => {
+      dispatch(deleteModule(moduleId));
+    });
+  };
 
 
   return (
@@ -41,22 +65,25 @@ function ModuleList() {
         <li className="list-group-item module-form-container">
 
           {/* add module button */}
-          <button className="btn btn-success add" onClick={() => dispatch(addModule({ ...module, course: courseId }))}>Add</button>
+          <button className="btn btn-success add"
+            onClick={handleAddModule}>
+            Add</button>
 
           {/* update module button */}
-          <button className="btn btn-primary update" onClick={() => dispatch(updateModule(module))}>
+          <button className="btn btn-primary update"
+            onClick={() => dispatch(updateModule(module))}>
             Update
           </button>
 
           {/* input module name */}
           <input className="module-input" value={module.name}
             onChange={(e) => dispatch(setModule({ ...module, name: e.target.value }))
-          }/>
+            } />
 
           {/* add module description */}
           <textarea className="module-textarea" value={module.description}
             onChange={(e) => dispatch(setModule({ ...module, description: e.target.value }))
-          }/>
+            } />
         </li>
 
         {/* list existing modules */}
@@ -77,10 +104,9 @@ function ModuleList() {
                   // warning message before deleting
                   const confirmation = window.confirm("Are you sure you want to delete module?");
                   if (confirmation) {
-                    dispatch(deleteModule(module._id));
+                    handleDeleteModule(module._id);
                   }
-                }
-                }>
+                }}>
                 Delete
               </button>
 
@@ -96,7 +122,7 @@ function ModuleList() {
               </div>
 
               {/* list lessons */}
-              {selectedModule._id === module._id && (
+              {selectedModule && selectedModule?._id === module._id && (
                 <ul className="list-group">
                   {module.lessons?.map((lesson: any, index: any) => (
                     <li className="list-group-item" key={index}>
