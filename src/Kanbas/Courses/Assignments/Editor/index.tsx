@@ -1,25 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { assignments } from "../../../Database";
+// import { assignments } from "../../../Database";
 import { FaCheckCircle, FaEllipsisV } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { addAssignment, updateAssignment } from "../assignmentsReducer";
+import {
+  addAssignment, 
+  updateAssignment,
+} from "../assignmentsReducer";
 import { KanbasState } from "../../../store";
+import * as client from "../client";
 
+  
 function AssignmentEditor() {
   const { courseId } = useParams();
+  const dispatch = useDispatch();
+
+  const assignmentList = useSelector(
+    (state: KanbasState) => state.assignmentsReducer.assignments
+  );
+
   const { assignmentId } = useParams();
   const assignment = useSelector((state: KanbasState) =>
     state.assignmentsReducer.assignments.find((a) => a._id === assignmentId)
   );
 
+  const navigate = useNavigate();
+
   const smallContainerStyle = {
     maxWidth: "70%",
     margin: "0 auto",
   };
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   // form fields
   const [assignmentName, setAssignmentName] = useState("");
@@ -42,28 +52,33 @@ function AssignmentEditor() {
   }, [assignment]);
 
   // handle form save
-  const handleSave = () => {
+  const handleSave = async () => {
     if (assignment) {
-      dispatch(
-        updateAssignment({
-          ...assignment,
-          title: assignmentName,
-          description: description,
-          points: points,
-          dueDate: dueDate,
-          availableFromDate: availableFromDate,
-          availableUntil: availableUntil,
-        })
-      );
-    } else
-      dispatch(addAssignment({
+      const updatedAssignment = {
+        ...assignment,
         title: assignmentName,
         description: description,
         points: points,
         dueDate: dueDate,
         availableFromDate: availableFromDate,
         availableUntil: availableUntil,
-      }));
+      };
+
+      const status = await client.updateAssignment(updatedAssignment);
+      dispatch(updateAssignment(updatedAssignment));
+    } else {
+      const newAssignment = {
+        title: assignmentName,
+        description: description,
+        points: points,
+        dueDate: dueDate,
+        availableFromDate: availableFromDate,
+        availableUntil: availableUntil,
+      };
+
+      const status = await client.createAssignment(courseId ?? "", newAssignment);
+      dispatch(addAssignment(newAssignment));
+    }
 
     navigate(`/Kanbas/Courses/${courseId}/Assignments`);
   };
@@ -71,7 +86,7 @@ function AssignmentEditor() {
   // handle cancel
   const handleCancel = () => {
     navigate(`/Kanbas/Courses/${courseId}/Assignments`);
-  }
+  };
 
   return (
     <div className="container mt-3">

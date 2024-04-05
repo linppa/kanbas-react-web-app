@@ -10,15 +10,12 @@ export const updateModule = async (module: any) => {
     return response.data;
 };
 
-
-
 // delete module
 export const deleteModule = async (moduleId: string) => {
     const response = await axios
         .delete(`${MODULES_API}/${moduleId}`);
     return response.data;
 };
-
 
 // creates a new module; posts module object in body & encode the course id in the URL
 export const createModule = async (courseId: string, module: any) => {
@@ -28,7 +25,6 @@ export const createModule = async (courseId: string, module: any) => {
     );
     return response.data;
 };
-
 
 // retrieves modules for given course
 export const findModulesForCourse = async (courseId: string) => {

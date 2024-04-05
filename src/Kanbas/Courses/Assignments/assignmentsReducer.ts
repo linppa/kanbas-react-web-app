@@ -1,19 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { assignments } from "../../Database";
+// import { assignments } from "../../Database";
 
 const initialState = {
-    assignments: assignments, // default assignment from database
-    assignment: { "title": "New Assignment Name", "dueDate": "Due Date & Time", "points": "Points" }, // default assignment format
+    assignments: [] as any[],
+    assignment: {
+        _id: "",
+        "title": "New Assignment Name",
+        "dueDate": "Due Date & Time",
+        "points": "Points"
+    },
 };
+
 const assignmentsSlice = createSlice({
     name: "assignments",
     initialState,
     reducers: {
+        // populate the assignments state variable when we retrieve assignments from the server
+        setAssignments: (state, action) => {
+            state.assignments = action.payload;
+        },
         addAssignment: (state, action) => {
-            state.assignments = [
-                { ...action.payload, _id: new Date().getTime().toString() },
-                ...state.assignments,
-            ];
+            state.assignments = [action.payload, ...state.assignments];
         },
         deleteAssignment: (state, action) => {
             state.assignments = state.assignments.filter(
@@ -27,14 +34,13 @@ const assignmentsSlice = createSlice({
                 } else {
                     return assignment;
                 }
-            }
-            );
+            });
         },
-        selectAssignment: (state, action) => {
+        setAssignment: (state, action) => {
             state.assignment = action.payload;
         },
     },
 });
 
-export const { addAssignment, deleteAssignment, updateAssignment, selectAssignment } = assignmentsSlice.actions;
+export const { addAssignment, deleteAssignment, updateAssignment, setAssignment, setAssignments } = assignmentsSlice.actions;
 export default assignmentsSlice.reducer;

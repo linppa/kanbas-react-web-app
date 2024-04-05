@@ -15,7 +15,7 @@ function Assignments() {
 
   return (
     <div>
-      <div className="d-flex justify-content-between mb-3" style={{ padding: "10px" }}>
+      {/* <div className="d-flex justify-content-between mb-3" style={{ padding: "10px" }}>
         <input
           type="search"
           className="form-control btn-custom-searchbar"
@@ -25,13 +25,13 @@ function Assignments() {
         <div>
           <button className="btn btn-outline-secondary btn-custom">
             <FaPlus /> Group
-          </button>
+          </button> */}
 
           {/* add assignment button */}
-          <Link
-            to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}>
+          {/* <Link
+            to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}> */}
             {/* link to edit/add new assignment */}
-            <button className="btn btn-outline-secondary btn-custom-module">
+            {/* <button className="btn btn-outline-secondary btn-custom-module">
               <FaPlus /> Assignment
             </button>
           </Link>
@@ -41,7 +41,7 @@ function Assignments() {
           </button>
         </div>
       </div>
-      <hr className="horizontal-line"></hr>
+      <hr className="horizontal-line"></hr> */}
 
       {/* ASSIGNMENT LIST */}
       <AssignmentList />
