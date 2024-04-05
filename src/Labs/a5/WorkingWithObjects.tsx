@@ -11,7 +11,8 @@ function WorkingWithObjects() {
         completed: false,
         score: 0,
     });
-    const ASSIGNMENT_URL = 'http://localhost:4000/a5/assignment';
+    const API_BASE = process.env.REACT_APP_API_BASE;
+    const ASSIGNMENT_URL = `${API_BASE}/a5/assignment`;
 
     // 3.2.4 module object
     const [module, setModule] = useState({
@@ -43,12 +44,12 @@ function WorkingWithObjects() {
             <h3> Assignment Object </h3>
             {/* get assignment object */}
             <h4> Retrieving Objects </h4>
-            <a href="http://localhost:4000/a5/assignment">
+            <a href={`${ASSIGNMENT_URL}`}>
                 <button className="btn btn-primary"> Get Assignment </button>
             </a>
             {/* get assignment property */}
             <h4> Retrieving Properties </h4>
-            <a href="http://localhost:4000/a5/assignment/title">
+            <a href={`${API_BASE}/a5/assignment/title`}>
                 <button className="btn btn-primary"> Get Assignment Title </button>
             </a>
             {/* change the title of assignment */}
@@ -75,12 +76,12 @@ function WorkingWithObjects() {
             <h3> Module Object </h3>
             {/* get module object */}
             <h4> Retrieving Objects </h4>
-            <a href="http://localhost:4000/a5/module">
+            <a href={`${API_BASE}/a5/module`}>
                 <button className="btn btn-primary"> Get Module </button>
             </a>
             {/* get module name property */}
             <h4> Retrieving Properties </h4>
-            <a href="http://localhost:4000/a5/module/name">
+            <a href={`${API_BASE}/a5/module/name`}>
                 <button className="btn btn-primary"> Get Module Name </button>
             </a>
             {/* change the name of module */}
@@ -94,7 +95,7 @@ function WorkingWithObjects() {
                     })}
                     value={module.name} />
                 {/* update name button */}
-                <a href={`http://localhost:4000/a5/module/name/${module.name}`}>
+                <a href={`${API_BASE}/a5/module/name/${module.name}`}>
                     <button className="btn btn-primary"> Update Module Name </button>
                 </a>
             </div>
