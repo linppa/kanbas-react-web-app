@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./modules.css";
 // import { modules } from "../../Database";
-import { FaEllipsisV, FaCheckCircle, FaPlusCircle } from "react-icons/fa";
+import {
+  FaEllipsisV,
+  FaCheckCircle,
+  FaPlusCircle,
+  FaPlus,
+  FaCrosshairs,
+  FaFileImport,
+  FaFileExport,
+} from "react-icons/fa";
 import { useParams } from "react-router";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -64,9 +72,19 @@ function ModuleList() {
     });
   };
 
-
   return (
     <>
+      {/* action buttons */}
+      <div className="d-flex justify-content-end mb-3">
+        <button className="btn btn-outline-secondary btn-custom mr-2"><FaFileImport /> Collapse All</button>
+        <button className="btn btn-outline-secondary btn-custom mr-2"><FaFileExport /> View Progress</button>
+        <button className="btn btn-outline-secondary btn-custom mr-2"><FaCrosshairs /> Publish All</button>
+        <button className="btn btn-outline-secondary btn-custom-module mr-2"
+          onClick={handleAddModule}><FaPlus /> Module</button>
+        <button className="btn btn-outline-secondary btn-custom-ellipses"><FaEllipsisV /></button>
+      </div>
+      <hr className="horizontal-line"></hr>
+
       {/* FORM TO ADD MODULE */}
       <ul className="list-group wd-modules">
         <li className="list-group-item module-form-container">
