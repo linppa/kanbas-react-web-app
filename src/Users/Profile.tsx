@@ -11,16 +11,23 @@ export default function Profile() {
 
     const fetchProfile = async () => {
         const account = await client.profile();
-        setProfile(account);
+        setProfile({ ...account, password: "" });
     };
+    useEffect(() => {
+        fetchProfile();
+    }, []);
 
     const save = async () => {
         await client.updateUser(profile);
     };
 
-    useEffect(() => {
-        fetchProfile();
-    }, []);
+    const signout = async () => {
+        await client.signout();
+        navigate("/Kanbas/Account/Signin");
+    };
+
+
+
     return (
         <div style={{ margin: 20 }}>
             <h1>Profile</h1>
@@ -29,7 +36,7 @@ export default function Profile() {
                     {/* users button */}
                     <Link to="/Kanbas/Account/Admin/Users"
                         className="btn btn-warning"
-                        style={{ width: 200, marginLeft: 0 }}>
+                        style={{ width: 200, marginLeft: 0, marginBottom: 5 }}>
                         Users
                     </Link>
 
@@ -81,11 +88,18 @@ export default function Profile() {
                     {/* save button */}
                     <button onClick={save}
                         className="btn btn-primary"
-                        style={{ width: 200, marginLeft: 0 }}>
+                        style={{ width: 200, marginLeft: 0, marginTop: 5 }}>
                         Save
+                    </button>< br />
+                    {/* signout button */}
+                    <button onClick={signout}
+                        className="btn btn-danger"
+                        style={{ width: 200, marginLeft: 0, marginTop: 5 }}>
+                        Signout
                     </button>
                 </div>
-            )}
+            )
+            }
         </div>
     );
 }
