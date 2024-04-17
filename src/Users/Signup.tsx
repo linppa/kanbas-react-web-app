@@ -28,6 +28,12 @@ export default function Signup() {
             <button onClick={signup} className="btn btn-primary" style={{ width: 200, marginLeft: 0 }}>
                 Signup
             </button>
+
+            <br /><br />
+            <h1>Signin</h1>
+            <button onClick={() => navigate("/Kanbas/Account/Signin")} className="btn btn-primary" style={{ width: 200, marginLeft: 0 }}>
+                Signin
+            </button>
         </div>
     );
 }

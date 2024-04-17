@@ -1,8 +1,7 @@
 import React from "react";
 import ToDo from "../Todo";
 import ComingUp from "../ComingUp";
-import { FaBan, FaCheckCircle, FaFileImport, FaFileExport, FaCrosshairs, FaChartPie, FaBullhorn, FaBell, FaCheckSquare, FaCalendarDay, FaXing, FaChartBar } from "react-icons/fa";
-import { FaXmark } from "react-icons/fa6";
+import { FaBan, FaCheckCircle, FaFileImport, FaFileExport, FaCrosshairs, FaBullhorn, FaBell, FaChartBar } from "react-icons/fa";
 import "../index.css";
 
 function Status() {
@@ -24,14 +23,13 @@ function Status() {
         <button className="btn btn-outline-secondary btn-custom-full"><FaBell /> View Course Notifications</button>
       </div>
 
-    {/* to do list */}
-    <ToDo />
+      {/* to do list */}
+      <ToDo />
 
-    {/* coming up list */}
-    <ComingUp />
-      
+      {/* coming up list */}
+      <ComingUp />
+
     </div>
   );
 }
-
 export default Status;

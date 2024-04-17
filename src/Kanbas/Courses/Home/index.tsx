@@ -9,7 +9,7 @@ function Home() {
         {/* modules list */}
         <ModuleList />
       </div>
-      
+
       {/* status bar */}
       <Status />
     </div>

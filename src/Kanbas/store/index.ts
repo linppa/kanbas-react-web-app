@@ -19,6 +19,4 @@ const store = configureStore({
     assignmentsReducer,
   },
 });
-
-
 export default store;

@@ -7,21 +7,12 @@ import {
   FaGripVertical,
 } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
-// import { assignments } from "../../Database";
 import { FaPenToSquare } from "react-icons/fa6";
 import { KanbasState } from "../../store";
-import { addAssignment, deleteAssignment, updateAssignment, setAssignment, setAssignments } from "./assignmentsReducer";
+import { addAssignment, deleteAssignment, setAssignments } from "./assignmentsReducer";
 import * as client from "./client";
 
 function AssignmentList() {
-
-  const initialAssignment = {
-    _id: "",
-    title: "New Assignment Name",
-    dueDate: "Due Date & Time",
-    points: "Points",
-  };
-
   const { courseId } = useParams();
 
   useEffect(() => {
@@ -37,14 +28,6 @@ function AssignmentList() {
   );
   const dispatch = useDispatch();
 
-  const [selectedAssignment, setSelectedAssignment] = useState(assignmentList[0]);
-
-  // // handle update assignment
-  // const handleUpdateAssignment = async () => {
-  //   const status = await client.updateAssignment(assignment);
-  //   dispatch(updateAssignment(assignment));
-  // };
-
   // handle add assignment to server
   const handleAddAssignment = () => {
     client.createAssignment(courseId ?? "", assignment).then((assignment) => {
@@ -58,7 +41,6 @@ function AssignmentList() {
       dispatch(deleteAssignment(assignmentId));
     });
   };
-
 
   // handle delete assignment
   const handleDelete = (assignmentId: any) => {
@@ -182,5 +164,4 @@ function AssignmentList() {
     </>
   );
 }
-
 export default AssignmentList;

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./modules.css";
-// import { modules } from "../../Database";
 import {
   FaEllipsisV,
   FaCheckCircle,
@@ -32,9 +31,6 @@ function ModuleList() {
       .then((modules) => dispatch(setModules(modules)));
   }, [courseId]);
 
-  // const modulesList = modules.filter((module: any) => module.course === courseId);
-  // const [selectedModule, setSelectedModule] = useState(modulesList[0]);
-
   const moduleList = useSelector(
     (state: KanbasState) => state.modulesReducer.modules
   );
@@ -45,18 +41,11 @@ function ModuleList() {
 
   const [selectedModule, setSelectedModule] = useState(moduleList[0]);
 
-  // const moduleList = useSelector((state: KanbasState) =>
-  //   state.modulesReducer.modules);
-  // const module = useSelector((state: KanbasState) =>
-  //   state.modulesReducer.module);
-  // const dispatch = useDispatch();
-
   // handle update module
   const handleUpdateModule = async () => {
     const status = await client.updateModule(module);
     dispatch(updateModule(module));
   };
-
 
   // handle add module to server
   const handleAddModule = () => {

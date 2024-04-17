@@ -3,7 +3,6 @@ import KanbasNavigation from "./Navigation";
 import Dashboard from "./Dashboard";
 import Courses from "./Courses";
 import "./styles.css";
-// import * as db from "./Database";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import store from "./store";

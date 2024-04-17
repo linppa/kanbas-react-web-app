@@ -1,6 +1,4 @@
 import ModuleList from "./List";
-import { FaFileImport, FaFileExport, FaCrosshairs, FaPlus, FaEllipsisV } from "react-icons/fa";
-
 
 function Modules() {
   return (

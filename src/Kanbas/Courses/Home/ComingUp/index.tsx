@@ -5,13 +5,13 @@ import { FaCalendarDay } from "react-icons/fa";
 
 function ComingUp() {
     const { courseId } = useParams();
-    
+
     // Filter modules by courseId, then map to get all lessons within those modules
     const comingUpLessons = Modules.filter(module => module.course === courseId)
-                                    .flatMap(module => module.lessons ? module.lessons.map(lesson => ({
-                                        ...lesson,
-                                        moduleName: module.name
-                                    })) : []);                                 
+        .flatMap(module => module.lessons ? module.lessons.map(lesson => ({
+            ...lesson,
+            moduleName: module.name
+        })) : []);
 
     return (
         <div style={{ paddingTop: '20px', paddingBottom: '100px' }}>
@@ -25,7 +25,7 @@ function ComingUp() {
                         </a>
                     </div>
                     <div className="subtext-coming-up">
-                    {courseId} | {lesson.description}
+                        {courseId} | {lesson.description}
                     </div>
                 </div>
             ))}

@@ -61,7 +61,6 @@ export default function UserTable() {
         setUsers(users);
     };
 
-
     useEffect(() => { fetchUsers(); }, []);
 
     return (

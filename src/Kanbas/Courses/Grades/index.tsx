@@ -1,13 +1,9 @@
 import React from "react";
 import { assignments, enrollments, grades, users } from "../../Database";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
-  FaCheckCircle,
-  FaPlus,
-  FaEllipsisV,
   FaFileImport,
   FaFileExport,
-  FaSearch,
   FaFilter,
 } from "react-icons/fa";
 import { BsGearFill } from "react-icons/bs";
@@ -35,8 +31,7 @@ function Grades() {
 
           <button
             style={{ width: "40px" }}
-            className="btn btn-outline-secondary btn-custom buttons"
-          >
+            className="btn btn-outline-secondary btn-custom buttons">
             <BsGearFill />
           </button>
         </span>
@@ -78,7 +73,6 @@ function Grades() {
       <button className="btn btn-outline-secondary btn-custom buttons">
         <FaFilter /> Apply Filter
       </button>
-
       <br />
 
       <div className="table-responsive mt-3" style={{ padding: "10px" }}>
