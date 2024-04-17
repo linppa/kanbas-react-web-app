@@ -15,6 +15,7 @@ function KanbasNavigation() {
     { label: "History", icon: <div><FaClock className="fs-2" /></div> },
     { label: "Studio", icon: <div><FaYoutube className="fs-2" /></div> },
     { label: "Commons", icon: <div><FaArrowCircleRight className="fs-2" /></div> },
+    { label: "Quizes", icon: <div><FaBook className="fs-2" /></div> },
     { label: "Help", icon: <div><FaQuestionCircle className="fs-2" /></div> }
   ];
 
