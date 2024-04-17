@@ -8,11 +8,11 @@ import { User } from "./client";
 
 export default function UserTable() {
     const [users, setUsers] = useState<User[]>([]);
-
     const [user, setUser] = useState<User>({
         _id: "", username: "", password: "", firstName: "",
         lastName: "", role: "USER"
     });
+
     const createUser = async () => {
         try {
             const newUser = await client.createUser(user);
@@ -49,14 +49,32 @@ export default function UserTable() {
         }
     };
 
-
     const fetchUsers = async () => {
         const users = await client.findAllUsers();
         setUsers(users);
     };
+
+    const [role, setRole] = useState("USER");
+    const fetchUsersByRole = async (role: string) => {
+        const users = await client.findUsersByRole(role);
+        setRole(role);
+        setUsers(users);
+    };
+
+
     useEffect(() => { fetchUsers(); }, []);
+
     return (
-        <div>
+        <div style={{ margin: 20 }}>
+            <select onChange={(e) => fetchUsersByRole(e.target.value)}
+            value={ role || "USER" } 
+            className="form-control w-25 float-end" style={{ width: 200 }}>
+                <option value="USER">User</option>
+                <option value="ADMIN">Admin</option>
+                <option value="FACULTY">Faculty</option>
+                <option value="STUDENT">Student</option>
+            </select>
+
             <h1>User Table</h1>
             <table className="table">
                 <thead>

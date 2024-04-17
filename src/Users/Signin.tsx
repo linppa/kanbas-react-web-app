@@ -14,7 +14,7 @@ export default function Signin() {
         navigate("/Kanbas/Account/Profile");
     };
     return (
-        <div>
+        <div style={{ margin: 20 }}>
             <h1>Signin</h1>
             <input value={credentials.username} onChange={(e) =>
                 setCredentials({ ...credentials, username: e.target.value })} 

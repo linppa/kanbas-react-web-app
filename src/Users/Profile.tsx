@@ -22,7 +22,7 @@ export default function Profile() {
         fetchProfile();
     }, []);
     return (
-        <div>
+        <div style={{ margin: 20 }}>
             <h1>Profile</h1>
             {profile && (
                 <div>
