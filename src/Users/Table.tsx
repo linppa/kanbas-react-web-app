@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { BsTrash3Fill, BsPlusCircleFill } from "react-icons/bs";
+import {
+    BsTrash3Fill, BsPlusCircleFill,
+    BsPencil, BsFillCheckCircleFill
+} from "react-icons/bs";
 import * as client from "./client";
 import { User } from "./client";
 
@@ -14,6 +17,33 @@ export default function UserTable() {
         try {
             const newUser = await client.createUser(user);
             setUsers([newUser, ...users]);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const deleteUser = async (user: User) => {
+        try {
+            await client.deleteUser(user);
+            setUsers(users.filter((u) => u._id !== user._id));
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const selectUser = async (user: User) => {
+        try {
+            const u = await client.findUserById(user._id);
+            setUser(u);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    const updateUser = async () => {
+        try {
+            const status = await client.updateUser(user);
+            setUsers(users.map((u) =>
+                (u._id === user._id ? user : u)));
         } catch (err) {
             console.log(err);
         }
@@ -35,6 +65,7 @@ export default function UserTable() {
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Role</th>
+                        <th>&nbsp;</th>
                     </tr>
 
                     <tr>
@@ -73,9 +104,14 @@ export default function UserTable() {
                                 <option value="STUDENT">Student</option>
                             </select>
                         </td>
-                        <td>
+                        {/* update & add user, green icons */}
+                        <td className="text-nowrap">
+                            <BsFillCheckCircleFill
+                                onClick={updateUser}
+                                style={{ color: "green", fontSize: 30, cursor: "pointer", marginBottom: 5, marginLeft: 10 }}
+                            />
                             <BsPlusCircleFill onClick={createUser}
-                                style={{ color: "green", fontSize: 30, cursor: "pointer", marginBottom: 5 }} />
+                                style={{ color: "green", fontSize: 30, cursor: "pointer", marginBottom: 5, marginLeft: 18 }} />
                         </td>
                     </tr>
 
@@ -87,6 +123,17 @@ export default function UserTable() {
                             <td>{user.firstName}</td>
                             <td>{user.lastName}</td>
                             <td>{user.role}</td>
+                            {/* delete & edit icons */}
+                            <td className="text-nowrap">
+                                <button onClick={() => deleteUser(user)}
+                                    className="btn btn-danger">
+                                    <BsTrash3Fill />
+                                </button>
+                                <button onClick={() => selectUser(user)}
+                                    className="btn btn-warning">
+                                    <BsPencil />
+                                </button>
+                            </td>
                         </tr>))}
                 </tbody>
             </table>

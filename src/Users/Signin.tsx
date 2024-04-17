@@ -22,7 +22,7 @@ export default function Signin() {
                 style={{ width: 200 }} />
             <input value={credentials.password} onChange={(e) =>
                 setCredentials({ ...credentials, password: e.target.value })} 
-                className="form-control" type="password"
+                className="form-control" type="password" placeholder="Password"
                 style={{ width: 200 }} />
             <button onClick={signin} className="btn btn-primary" style={{ width: 200, marginLeft: 0 }}>
                 Signin
