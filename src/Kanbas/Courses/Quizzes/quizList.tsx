@@ -15,7 +15,7 @@ function QuizList() {
         courseId: "",
         title: "New Title",
         description: "New Description",
-        quizType: "",
+        quizType: "Graded Quiz",
         points: 0,
         assignmentGroup: "Quizzes",
         isShuffled: true,
@@ -24,7 +24,7 @@ function QuizList() {
         showCorrectAnswers: "After Due Date",
         viewResponse: "After Due Date",
         accessCode: "New Access Code",
-        isPublished: true,
+        isPublished: false,
         onQuestionAtaTime: true,
         webcamRequired: true,
         lockQuestionsAfterAnswering: true,
@@ -59,19 +59,11 @@ function QuizList() {
     };
 
     // handle delete quiz from server
-    const handleDeleteQuiz = (quizId: string) => {
+    const handleDelete = (quizId: string) => {
         client.deleteQuiz(quizId).then((status) => {
             dispatch(deleteQuiz(quizId));
         });
     };
-
-    // handle delete quiz
-    const handleDelete = (quizId: any) => {
-        const confirmation = window.confirm("Are you sure you want to delete quiz?");
-        if (confirmation) {
-            dispatch(deleteQuiz(quizId));
-        }
-    }
 
     // handle edit quiz
     const handleEditQuiz = (quizId: any) => {
@@ -91,6 +83,9 @@ function QuizList() {
             const updatedQuiz = { ...quiz, isPublished: !quiz.isPublished };
             client.updateQuiz(updatedQuiz).then((quiz) => {
                 dispatch(updateQuiz(quiz));
+                // refresh the page
+                client.findQuizzesForCourse(courseId ?? "")
+                    .then((quizzes) => dispatch(setQuizzes(quizzes)));
             });
         }
     };
@@ -206,8 +201,15 @@ function QuizList() {
 
                                 {/* icons float to right */}
                                 < div className="float-end" >
-                                    <FaCheckCircle className="text-success"
-                                        style={{ marginRight: "10px" }} />
+                                    {/* toggle icon depending on publish status */}
+                                    <span onClick={() => handlePublishQuiz(quiz._id)}
+                                        style={{ marginRight: "10px" }}>
+                                        {quiz.isPublished ? (
+                                            <FaCheckCircle className="text-success" />
+                                        ) : (
+                                            <FaTimesCircle className="text-danger" />
+                                        )}
+                                    </span>
 
                                     <button className="btn btn-outline-secondary btn-custom-ellipses"
                                         onClick={(event) => handleContextMenuOpen(event, quiz._id)}
@@ -221,7 +223,10 @@ function QuizList() {
                                     className="btn btn-danger delete"
                                     onClick={(event) => {
                                         event.preventDefault();
+                                        const confirmation = window.confirm("Are you sure you want to delete quiz?");
+                                        if (confirmation) {
                                         handleDelete(quiz._id);
+                                        }
                                     }}
                                     style={{ margin: "0px", marginLeft: "10px" }}
                                 > Delete
@@ -236,7 +241,15 @@ function QuizList() {
                                             right: `25px`,
                                         }}>
                                             <li onClick={() => handleEditQuiz(contextMenu.quizId)}>Edit</li>
-                                            <li onClick={() => handleDelete(contextMenu.quizId)}>Delete</li>
+                                            <li onClick={(event) => {
+                                                event.preventDefault();
+                                                const confirmation = window.confirm("Are you sure you want to delete quiz?");
+                                                if (confirmation) {
+                                                    handleDelete(contextMenu.quizId);
+                                                }
+                                            }
+                                            }>Delete</li>
+                                    
                                             <li onClick={() => handlePublishQuiz(contextMenu.quizId)}>Publish/Unpublish</li>
                                         </ul>
                                     )}

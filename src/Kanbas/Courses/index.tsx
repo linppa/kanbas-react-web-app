@@ -10,6 +10,7 @@ import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
 
 import Quizzes from "./Quizzes";
+import QuizDetail from "./Quizzes/Detail";
 
 import "./index.css";
 import { FaGlasses } from "react-icons/fa";
@@ -20,7 +21,6 @@ import axios from "axios";
 function Courses() {
   const { courseId } = useParams();
   const COURSES_API = "http://localhost:4000/api/courses";
-  // const course = courses.find((course) => course._id === courseId); 
   const [course, setCourse] = useState<any>({ _id: "" });
   const findCourseById = async (courseId?: string) => {
     const response = await axios.get(
@@ -72,6 +72,8 @@ function Courses() {
             <Route path="Assignments/:assignmentId" element={<AssignmentEditor />} />
             <Route path="Grades" element={<Grades />} />
             <Route path="Quizzes" element={<Quizzes />} />
+            <Route path="Quizzes/:quizId" element={<QuizDetail />} />
+
           </Routes>
         </div>
       </div>
