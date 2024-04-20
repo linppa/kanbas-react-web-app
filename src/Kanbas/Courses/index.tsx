@@ -8,6 +8,9 @@ import Modules from "./Modules";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
+
+import Quizzes from "./Quizzes";
+
 import "./index.css";
 import { FaGlasses } from "react-icons/fa";
 import { useState, useEffect } from "react";
@@ -68,6 +71,7 @@ function Courses() {
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:assignmentId" element={<AssignmentEditor />} />
             <Route path="Grades" element={<Grades />} />
+            <Route path="Quizzes" element={<Quizzes />} />
           </Routes>
         </div>
       </div>
