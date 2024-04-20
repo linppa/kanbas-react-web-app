@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { FaEllipsisV, FaCheckCircle, FaPlus, FaGripVertical, FaRocket } from "react-icons/fa";
+import { FaEllipsisV, FaCheckCircle, FaPlus, FaGripVertical, FaRocket, FaTimesCircle } from "react-icons/fa";
 import { FaPenToSquare } from "react-icons/fa6";
 import { Link, useParams } from "react-router-dom";
 import { KanbasState } from "../../store";
 import { addQuiz, deleteQuiz, updateQuiz, setQuiz, setQuizzes } from "./quizzesReducer";
 import * as client from "./client";
+import "./index.css";
 
 function QuizList() {
 
@@ -72,6 +73,28 @@ function QuizList() {
         }
     }
 
+    // handle edit quiz
+    const handleEditQuiz = (quizId: any) => {
+        const quiz = quizList.find((quiz) => quiz._id === quizId);
+        if (quiz) {
+            // redirect to quiz edit page
+            dispatch(setQuiz(quiz));
+
+        }
+    };
+
+    // handle publish quiz
+    const handlePublishQuiz = (quizId: any) => {
+        const quiz = quizList.find((quiz) => quiz._id === quizId);
+        if (quiz) {
+            // toggle isPublished value
+            const updatedQuiz = { ...quiz, isPublished: !quiz.isPublished };
+            client.updateQuiz(updatedQuiz).then((quiz) => {
+                dispatch(updateQuiz(quiz));
+            });
+        }
+    };
+
     // ** handles quiz availability **
     const handleAvailability = (quizId: any) => {
         // if current date is after quizzes availability date, "Closed"
@@ -92,20 +115,29 @@ function QuizList() {
         }
     };
 
-    // ** on clicking ellipsis, show quiz options (edit, delete, publish, copy, sort) **
+    // ** on clicking ellipsis, show quiz options (edit, delete, publish) **
     const [contextMenu, setContextMenu] = useState<{ quizId: any, anchorPoint: { x: number, y: number } } | null>(null);
-
     const handleContextMenuOpen = (event: any, quizId: any) => {
-        event.preventDefault();
+        const rect = event.target.getBoundingClientRect();
         setContextMenu({
-            quizId,
-            anchorPoint: { x: event.clientX, y: event.clientY }
+            quizId: quizId,
+            anchorPoint: { x: rect.left, y: rect.top } // Positioning menu to the right of the button
         });
+        event.stopPropagation(); // Prevent triggering click on underlying elements
     };
-
     const handleContextMenuClose = () => {
         setContextMenu(null);
     };
+    useEffect(() => {
+        const closeMenu = (event: any) => {
+            if (!event.target.closest('.context-menu')) {
+                handleContextMenuClose();
+            }
+        };
+        document.addEventListener('click', closeMenu);
+        return () => document.removeEventListener('click', closeMenu);
+    }, []);
+
 
     return (
         <>
@@ -174,8 +206,14 @@ function QuizList() {
 
                                 {/* icons float to right */}
                                 < div className="float-end" >
-                                    <FaCheckCircle className="text-success" />
-                                    <FaEllipsisV style={{ color: "gray" }} className="ms-2" />
+                                    <FaCheckCircle className="text-success"
+                                        style={{ marginRight: "10px" }} />
+
+                                    <button className="btn btn-outline-secondary btn-custom-ellipses"
+                                        onClick={(event) => handleContextMenuOpen(event, quiz._id)}
+                                        style={{ border: "none" }}>
+                                        <FaEllipsisV />
+                                    </button>
                                 </div>
 
                                 {/* delete module button */}
@@ -184,8 +222,24 @@ function QuizList() {
                                     onClick={(event) => {
                                         event.preventDefault();
                                         handleDelete(quiz._id);
-                                    }}> Delete
+                                    }}
+                                    style={{ margin: "0px", marginLeft: "10px" }}
+                                > Delete
                                 </button>
+
+                                {
+                                    contextMenu && (
+                                        <ul className="context-menu" style={{
+                                            position: 'fixed',
+                                            top: `${contextMenu.anchorPoint.y}px`,
+                                            left: `${contextMenu.anchorPoint.x}px`,
+                                            right: `25px`,
+                                        }}>
+                                            <li onClick={() => handleEditQuiz(contextMenu.quizId)}>Edit</li>
+                                            <li onClick={() => handleDelete(contextMenu.quizId)}>Delete</li>
+                                            <li onClick={() => handlePublishQuiz(contextMenu.quizId)}>Publish/Unpublish</li>
+                                        </ul>
+                                    )}
                             </li>
                         ))}
                     </ul>

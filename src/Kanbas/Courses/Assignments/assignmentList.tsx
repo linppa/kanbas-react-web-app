@@ -114,12 +114,10 @@ function AssignmentList() {
                   <div className="d-flex align-items-center">
                     <FaGripVertical
                       style={{ color: "gray" }}
-                      className="me-2"
-                    />
+                      className="me-2" />
                     <FaPenToSquare
                       style={{ color: "green" }}
-                      className="me-2"
-                    />
+                      className="me-2" />
                   </div>
                 </div>
                 <div className="flex-grow-1">
@@ -130,8 +128,7 @@ function AssignmentList() {
                       marginLeft: "10px",
                       color: "black",
                       fontWeight: "bolder",
-                    }}
-                  >
+                    }} >
                     {assignment.title}
                   </Link>
                   <br />
