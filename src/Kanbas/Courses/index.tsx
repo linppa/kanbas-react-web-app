@@ -12,6 +12,8 @@ import "./index.css";
 import { FaGlasses } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Quizzes from "./Quizzes";
+import QuizDetails from "./Quizzes/Details";
 
 {/* main course page */}
 function Courses() {
@@ -67,6 +69,9 @@ function Courses() {
             <Route path="Piazza" element={<h1>Piazza</h1>} />
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:assignmentId" element={<AssignmentEditor />} />
+            {/* QUIZZES */}
+            <Route path="Quizzes" element={<Quizzes />} />
+            <Route path="Quizzes/:quizId" element={<QuizDetails />} />
             <Route path="Grades" element={<Grades />} />
           </Routes>
         </div>

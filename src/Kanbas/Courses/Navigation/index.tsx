@@ -4,7 +4,7 @@ import "./index.css";
 import { courses } from "../../Database";
 
 function CourseNavigation() {
-  const links = ["Home", "Modules", "Piazza", "Grades", "Assignments"];
+  const links = ["Home", "Modules", "Piazza", "Grades", "Assignments", "Quizzes"];
   const { pathname } = useLocation();
   const { courseId } = useParams();
   const course = courses.find((course) => course._id === courseId);
