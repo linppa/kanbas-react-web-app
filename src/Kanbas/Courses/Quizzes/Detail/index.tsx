@@ -336,6 +336,7 @@ function QuizDetail() {
                 >
                     Return to Quizzes
                 </button>
+                <br /><br />
             </div>
         </div>
     ) : (

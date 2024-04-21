@@ -1,16 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import { useNavigate, useParams, Link, NavLink, useLocation } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
-// import { KanbasState } from "../../../store";
-// import * as client from "../client";
-// import './index.css';
-// import { addQuiz, setQuiz, updateQuiz } from "../quizzesReducer";
-
-
-// function Questions() {
-//     const 
-// }
-
 import { useNavigate, useParams, Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { KanbasState } from "../../../store";
@@ -18,7 +5,7 @@ import * as client from "../client";
 import { FaBan, FaPlus, FaSearch } from "react-icons/fa";
 import './index.css';
 import { useEffect, useState } from "react";
-import { addQuiz, setQuiz, updateQuiz } from "../quizzesReducer";
+import { addQuiz, setQuiz, updateQuiz, getQuizId } from "../quizzesReducer";
 
 function Questions() {
     const quiz = useSelector((state: KanbasState) =>
@@ -95,7 +82,7 @@ function Questions() {
                                     end={true}
                                     className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
                                     aria-current="page"
-                                    to={`/Kanbas/Courses/${courseId}/Quizzes/${quizId}/edit`}>
+                                    to={`/Kanbas/Courses/${courseId}/Quizzes/${quizId}/Edit`}>
                                     Details
                                 </NavLink>
                             </li>
@@ -159,7 +146,7 @@ function Questions() {
                     <div className="float-start">
                         <input className="form-check-input" type="checkbox" id="check-9" />
                         <label className="form-check-label" htmlFor="check-9"
-                        >Notify users that this content has changed</label>
+                        > Notify users that this content has changed</label>
                     </div>
                     <div>
                         <button
