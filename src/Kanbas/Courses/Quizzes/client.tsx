@@ -33,3 +33,10 @@ export const findQuizzesForCourse = async (courseId: string) => {
         .get(`${COURSES_API}/${courseId}/quizzes`);
     return response.data;
 };
+
+// retrieves quiz by quiz id
+export const findQuizById = async (quizId: string) => {
+    const response = await axios
+        .get(`${QUIZZES_API}/${quizId}`);
+    return response.data;
+};

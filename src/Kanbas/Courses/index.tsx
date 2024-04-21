@@ -11,6 +11,7 @@ import Grades from "./Grades";
 
 import Quizzes from "./Quizzes";
 import QuizDetail from "./Quizzes/Detail";
+import QuizEditor from "./Quizzes/Editor";
 
 import "./index.css";
 import { FaGlasses } from "react-icons/fa";
@@ -73,6 +74,7 @@ function Courses() {
             <Route path="Grades" element={<Grades />} />
             <Route path="Quizzes" element={<Quizzes />} />
             <Route path="Quizzes/:quizId" element={<QuizDetail />} />
+            <Route path="Quizzes/:quizId/edit" element={<QuizEditor />} />
 
           </Routes>
         </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaEllipsisV, FaCheckCircle, FaPlus, FaGripVertical, FaRocket, FaTimesCircle } from "react-icons/fa";
 import { FaPenToSquare } from "react-icons/fa6";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { KanbasState } from "../../store";
 import { addQuiz, deleteQuiz, updateQuiz, setQuiz, setQuizzes } from "./quizzesReducer";
 import * as client from "./client";
@@ -65,12 +65,13 @@ function QuizList() {
         });
     };
 
+    const navigate = useNavigate();
     // handle edit quiz
     const handleEditQuiz = (quizId: any) => {
         const quiz = quizList.find((quiz) => quiz._id === quizId);
         if (quiz) {
             // redirect to quiz edit page
-            dispatch(setQuiz(quiz));
+            navigate(`/Kanbas/Courses/${courseId}/Quizzes/${quizId}/Edit`);
 
         }
     };
@@ -145,13 +146,12 @@ function QuizList() {
                 />
                 <div>
                     {/* add quiz button */}
-                    <Link
-                        to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`}>
+
                         <button className="btn btn-outline-secondary btn-custom-module"
                             onClick={handleAddQuiz}>
                             <FaPlus /> Quiz
                         </button>
-                    </Link>
+
 
                     <button className="btn btn-outline-secondary btn-custom-ellipses">
                         <FaEllipsisV />
@@ -225,7 +225,7 @@ function QuizList() {
                                         event.preventDefault();
                                         const confirmation = window.confirm("Are you sure you want to delete quiz?");
                                         if (confirmation) {
-                                        handleDelete(quiz._id);
+                                            handleDelete(quiz._id);
                                         }
                                     }}
                                     style={{ margin: "0px", marginLeft: "10px" }}
@@ -249,7 +249,7 @@ function QuizList() {
                                                 }
                                             }
                                             }>Delete</li>
-                                    
+
                                             <li onClick={() => handlePublishQuiz(contextMenu.quizId)}>Publish/Unpublish</li>
                                         </ul>
                                     )}

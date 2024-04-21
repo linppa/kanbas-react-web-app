@@ -1,0 +1,489 @@
+import React, { useEffect, useState } from "react"
+import { useNavigate, useParams, Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { KanbasState } from "../../../store";
+import * as client from "../client";
+import { FaBan, FaEllipsisV, FaCheckCircle } from "react-icons/fa";
+import { addQuiz, updateQuiz, setQuiz } from "../quizzesReducer";
+import "./index.css";
+
+// quiz: {
+// _id: "",
+// courseId: "",
+// title: "New Title",
+// description: "New Description",
+// instructions: "",
+// quizType: "Graded Quiz",
+// points: 0,
+// assignmentGroup: "Quizzes",
+// isShuffled: true,
+// timeLimit: 20,
+// isMultipleAttempts: false,
+// showCorrectAnswers: "After Due Date",
+// viewResponse: "After Due Date",
+// accessCode: "",
+// isPublished: false,
+// onQuestionAtaTime: true,
+// webcamRequired: false,
+// lockQuestionsAfterAnswering: false,
+// dueDate: "2024-04-20",
+// availabilityDate: "2024-04-10",
+// untilDate: "2024-04-21",
+// questions: []
+
+function QuizEditor() {
+    const { courseId } = useParams();
+    const dispatch = useDispatch();
+
+    const quizList = useSelector(
+        (state: KanbasState) => state.quizzesReducer.quizzes
+    );
+
+    const { quizId } = useParams();
+    const quiz = useSelector((state: KanbasState) =>
+        state.quizzesReducer.quizzes.find((q) => q._id === quizId)
+    );
+
+    const navigate = useNavigate();
+
+    const smallContainerStyle = {
+        maxWidth: "70%",
+        margin: "0 auto",
+    };
+
+    // form fields
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [quizType, setQuizType] = useState("");
+    const [points, setPoints] = useState("");
+    const [assignmentGroup, setAssignmentGroup] = useState("");
+    const [isShuffled, setIsShuffled] = useState("");
+    const [timeLimit, setTimeLimit] = useState("");
+    const [isMultipleAttempts, setIsMultipleAttempts] = useState("");
+    const [showCorrectAnswers, setShowCorrectAnswers] = useState("");
+    const [accessCode, setAccessCode] = useState("");
+    const [oneQuestionAtaTime, setOneQuestionAtaTime] = useState("");
+    const [webcamRequired, setWebcamRequired] = useState("");
+    const [lockQuestionsAfterAnswering, setLockQuestionsAfterAnswering] = useState("");
+    const [dueDate, setDueDate] = useState("");
+    const [availabilityDate, setAvailabilityDate] = useState("");
+    const [untilDate, setUntilDate] = useState("");
+    const [questions, setQuestions] = useState("");
+
+    // get quiz data if exists
+    useEffect(() => {
+        if (quiz) {
+            setTitle(quiz.title);
+            setDescription(quiz.description || "");
+            setQuizType(quiz.quizType || "Graded Quiz");
+            setPoints(quiz.points || "");
+            setAssignmentGroup(quiz.assignmentGroup || "Quizzes");
+            setIsShuffled(quiz.isShuffled || "");
+            setTimeLimit(quiz.timeLimit || "");
+            setIsMultipleAttempts(quiz.isMultipleAttempts || "");
+            setShowCorrectAnswers(quiz.showCorrectAnswers || "");
+            setAccessCode(quiz.accessCode || "");
+            setOneQuestionAtaTime(quiz.oneQuestionAtaTime || "");
+            setWebcamRequired(quiz.webcamRequired || "");
+            setLockQuestionsAfterAnswering(quiz.lockQuestionsAfterAnswering || "");
+            setDueDate(quiz.dueDate || "");
+            setAvailabilityDate(quiz.availabilityDate || "");
+            setUntilDate(quiz.untilDate || "");
+            setQuestions(quiz.questions || "");
+        }
+    }, [quiz]);
+
+    // handle form save
+    const handleSave = async (publish = false) => {
+        const updatedQuizData = {
+            ...quiz,
+            title,
+            description,
+            quizType,
+            points: Number(points),
+            assignmentGroup,
+            isShuffled,
+            timeLimit: Number(timeLimit),
+            isMultipleAttempts,
+            showCorrectAnswers,
+            accessCode,
+            oneQuestionAtaTime,
+            webcamRequired,
+            lockQuestionsAfterAnswering,
+            dueDate,
+            availabilityDate,
+            untilDate,
+            isPublished: publish ? true : quiz?.isPublished,
+        };
+        // If publish is true, update the isPublished state
+        if (publish) {
+            updatedQuizData.isPublished = true;
+        }
+        try {
+            const response = await client.updateQuiz(updatedQuizData);
+            dispatch(updateQuiz(response));
+            // Navigate to the list of quizzes after successful update
+            navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
+        } catch (error) {
+            console.error('Failed to update quiz:', error);
+            // Show an error message
+            alert('An error occurred while saving the quiz. Please try again.');
+        }
+    };
+
+    // handle cancel
+    const handleCancel = () => {
+        navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
+    };
+
+    // handle quiz type change
+    const handleQuizTypeChange = (e: any) => {
+        setQuizType(e.target.value);
+    };
+
+    return (
+        <div className="container mt-3">
+            <div className="d-flex justify-content-between mb-3">
+                <h1>Quiz Editor</h1>
+
+                <span className="d-flex float-end">
+                    <button
+                        className="btn btn-outline-secondary btn-custom buttons"
+                        style={{
+                            border: "0px",
+                            backgroundColor: "transparent",
+                            color: "green",
+                        }}
+                    >
+                        <FaCheckCircle className="me-2" style={{ color: "green" }} />
+                        Publish
+                    </button>
+                    <button
+                        style={{ width: "40px" }}
+                        className="btn btn-outline-secondary btn-custom buttons"
+                    >
+                        <FaEllipsisV />
+                    </button>
+                </span>
+            </div>
+            <hr className="horizontal-line"></hr>
+
+            {/* navigation tabs */}
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <div className="container-fluid">
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarNav">
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <NavLink
+                                    className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+                                    aria-current="page"
+                                    to='#'>
+                                    Details
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink
+                                    className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+                                    to={`/Kanbas/Courses/${courseId}/Quizzes/questions`}>
+                                    Questions
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <hr />
+
+            {/* edit title */}
+            <label htmlFor="assignmentName" className="form-label">
+                Quiz Title
+            </label>
+            <input
+                type="text"
+                className="form-control"
+                id="assignmentName"
+                value={title}
+                defaultValue={quiz ? quiz.title : ""}
+                onChange={(e) => setTitle(e.target.value)}
+            />
+            <br />
+
+
+            {/* description */}
+            <label htmlFor="quizDescription" className="form-label">
+                Description
+            </label>
+            <textarea
+                className="form-control"
+                id="quizDescription"
+                value={description}
+                rows={3}
+                placeholder="Description here..."
+                onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+            <br />
+
+            {/* quiz type */}
+            <label htmlFor="quiz-type">Quiz Type : </label>
+            <select
+                id="quiz-type"
+                value={quizType}
+                onChange={handleQuizTypeChange}
+                className="form-select"
+            >
+                <option value="Graded Quiz">Graded Quiz</option>
+                <option value="Practice Quiz">Practice Quiz</option>
+                <option value="Graded Survey">Graded Survey</option>
+                <option value="Ungraded Survey">Ungraded Survey</option>
+            </select>
+            <br />
+
+            {/* points */}
+            <div className="mb-3">
+                <label htmlFor="points" className="form-label">
+                    Points
+                </label>
+                <input
+                    type="number"
+                    className="form-control"
+                    id="points"
+                    defaultValue={quiz ? quiz.points : ""}
+                    onChange={(e) => setPoints(e.target.value)}
+                />
+            </div>
+
+            {/* assignment group */}
+            <label htmlFor="assignmentGroup">Assignment Group</label>
+            <select
+                id="assignmentGroup"
+                className="form-select"
+                value={assignmentGroup}
+                onChange={(e) => setAssignmentGroup(e.target.value)}
+            >
+                <option value="Quizzes">Quizzes</option>
+                <option value="Assignments">Assignments</option>
+                <option value="Surveys">Surveys</option>
+            </select>
+            <br />
+
+            <h3> Options </h3>
+            {/* shuffle checkbox */}
+            <div className="form-check">
+                <input
+                    type="checkbox"
+                    className="form-check-input"
+                    checked={quiz?.isShuffled}
+                    onChange={(e) =>
+                        dispatch(setQuiz({ ...quiz, isShuffled: e.target.checked }))
+                    }
+                    id="shuffleAnswers"
+                />
+                <label htmlFor="shuffleAnswers" className="form-check-label">Shuffle Answers</label>
+            </div>
+
+            {/* time limit */}
+            <div className="mb-3">
+                <label htmlFor="timeLimit" className="form-label">
+                    Time Limit (in minutes)
+                </label>
+                <input
+                    type="number"
+                    className="form-control"
+                    id="timeLimit"
+                    defaultValue={quiz ? quiz.timeLimit : ""}
+                    onChange={(e) => setTimeLimit(e.target.value)}
+                />
+            </div>
+
+            {/* multiple attempts */}
+            <div className="form-check">
+                <input
+                    type="checkbox"
+                    className="form-check-input"
+                    checked={quiz?.isMultipleAttempts}
+                    onChange={(e) =>
+                        dispatch(setQuiz({ ...quiz, isMultipleAttempts: e.target.checked }))
+                    }
+                    id="multipleAttempts"
+                />
+                <label htmlFor="multipleAttempts" className="form-check-label">Multiple Attempts</label>
+
+                {/* show correct answers */}
+                <label htmlFor="showCorrectAnswers">Show Correct Answers</label>
+                <select
+                    id="showCorrectAnswers"
+                    className="form-select"
+                    value={quiz?.showCorrectAnswers}
+                    onChange={(e) => setShowCorrectAnswers(e.target.value)}
+                >
+                    <option value="After Due Date">After Due Date</option>
+                    <option value="After Last Attempt">After Last Attempt</option>
+                    <option value="Never">Never</option>
+                </select>
+                <br />
+
+                {/* access code */}
+                <label htmlFor="accessCode" className="form-label">
+                    Access Code
+                </label>
+                <input
+                    type="text"
+                    className="form-control"
+                    id="accessCode"
+                    value={quiz?.accessCode}
+                    onChange={(e) => setAccessCode(e.target.value)}
+                />
+                <br />
+
+                {/* one question at a time */}
+                <div className="form-check">
+                    <input
+                        type="checkbox"
+                        className="form-check-input"
+                        checked={quiz?.oneQuestionAtaTime}
+                        onChange={(e) =>
+                            dispatch(setQuiz({ ...quiz, oneQuestionAtaTime: e.target.checked }))
+                        }
+                        id="oneQuestionAtaTime"
+                    />
+                    <label htmlFor="oneQuestionAtaTime" className="form-check-label">One Question At a Time</label>
+                </div>
+
+                {/* webcam required */}
+                <div className="form-check">
+                    <input
+                        type="checkbox"
+                        className="form-check-input"
+                        checked={quiz?.webcamRequired}
+                        onChange={(e) =>
+                            dispatch(setQuiz({ ...quiz, webcamRequired: e.target.checked }))
+                        }
+                        id="webcamRequired"
+                    />
+                    <label htmlFor="webcamRequired" className="form-check-label">Webcam Required</label>
+                </div>
+
+
+                {/* lock questions after answering */}
+                <div className="form-check">
+                    <input
+                        type="checkbox"
+                        className="form-check-input"
+                        checked={quiz?.lockQuestionsAfterAnswering}
+                        onChange={(e) =>
+                            dispatch(setQuiz({ ...quiz, lockQuestionsAfterAnswering: e.target.checked }))
+                        }
+                        id="lockQuestionsAfterAnswering"
+                    />
+                    <label htmlFor="lockQuestionsAfterAnswering" className="form-check-label">Lock Questions After Answering</label>
+                </div>
+                <br />
+
+                {/* due date */}
+                <div className="row">
+                    <div className="col-2">
+                        <div className="float-end">Assign</div>
+                    </div>
+                    <div className="col-8">
+                        <ul className="list-group list-group-item wd-kanbas-edit-section">
+                            <li className="list-group-item border-0">
+                                <b>Due</b>
+                            </li>
+
+                            <li className="list-group-item border-0">
+                                <input
+                                    type="date"
+                                    className="form-control"
+                                    id="input-4"
+                                    value={quiz?.dueDate}
+                                    onChange={(e) =>
+                                        dispatch(setQuiz({ ...quiz, dueDate: e.target.value }))
+                                    }
+                                />
+                            </li>
+                            <li className="list-group-item border-0">
+                                <div className="row">
+                                    <div className="col-6 float-start">
+                                        <b className="wd-kanbas-width-45">Available from</b>
+                                    </div>
+                                    <div className="col-6 wd-float-start">
+                                        <b className="wd-kanbas-width-45">Until</b>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li className="list-group-item border-0">
+                                <div className="row">
+                                    <div className="col-6 float-start">
+                                        <input
+                                            type="date"
+                                            className="form-control float-start wd-kanbas-width-45 me-1"
+                                            id="input-5"
+                                            value={quiz?.availabilityDate}
+                                            onChange={(e) =>
+                                                dispatch(setQuiz({ ...quiz, availabilityDate: e.target.value }))
+                                            }
+
+                                        />
+                                    </div>
+                                    <div className="col-6 float-start">
+                                        <input
+                                            type="date"
+                                            className="form-control float-start wd-kanbas-width-45 ms-1"
+                                            id="input-6"
+                                            value={quiz?.untilDate}
+                                            onChange={(e) =>
+                                                dispatch(setQuiz({ ...quiz, untilDate: e.target.value }))
+                                            }
+
+                                        />
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr />
+                <br />
+                <div>
+                    <div className="float-start">
+                        <input className="form-check-input" type="checkbox" id="check-9" />
+                        <label className="form-check-label" htmlFor="check-9"
+                        >Notify users that this content has changed</label>
+                    </div>
+                    <div>
+                        {/* save only */}
+                        <button
+                            onClick={() => handleSave(false)}
+                            className="btn btn-success ms-2 float-end"
+                        >
+                            Save
+                        </button>
+                        {/* save & publish */}
+                        <button
+                            onClick={() => handleSave(true)}
+                            className="btn btn-primary ms-2 float-end"
+                        >
+                            Save & Publish
+                        </button>
+                        <button
+                            onClick={() => handleCancel()}
+                            className="btn btn-danger ms-2 float-end"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <hr />
+            </div>
+        </div>
+    );
+}
+
+export default QuizEditor;

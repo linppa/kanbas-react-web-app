@@ -23,7 +23,7 @@ function QuizDetail() {
     //     viewResponse: "After Due Date",
     //     accessCode: "New Access Code",
     //     isPublished: false,
-    //     onQuestionAtaTime: true,
+    //     oneQuestionAtaTime: true,
     //     webcamRequired: true,
     //     lockQuestionsAfterAnswering: true,
     //     dueDate: "2023-04-20",
@@ -63,7 +63,7 @@ function QuizDetail() {
     const [viewResponse, setViewResponse] = useState("");
     const [accessCode, setAccessCode] = useState("");
     const [isPublished, setIsPublished] = useState("");
-    const [onQuestionAtaTime, setOnQuestionAtaTime] = useState("");
+    const [oneQuestionAtaTime, setOneQuestionAtaTime] = useState("");
     const [webcamRequired, setWebcamRequired] = useState("");
     const [lockQuestionsAfterAnswering, setLockQuestionsAfterAnswering] = useState("");
     const [dueDate, setDueDate] = useState("");
@@ -77,7 +77,7 @@ function QuizDetail() {
             setDescription(quiz.description || "");
             setQuizType(quiz.quizType || "Graded Quiz");
             setPoints(quiz.points || "");
-            setAssignmentGroup(quiz.assignmentGroup || "");
+            setAssignmentGroup(quiz.assignmentGroup || "Quizzes");
             setIsShuffled(quiz.isShuffled || "");
             setTimeLimit(quiz.timeLimit || "");
             setIsMultipleAttempts(quiz.isMultipleAttempts || "");
@@ -85,7 +85,7 @@ function QuizDetail() {
             setViewResponse(quiz.viewResponse || "");
             setAccessCode(quiz.accessCode || "");
             setIsPublished(quiz.isPublished || "");
-            setOnQuestionAtaTime(quiz.onQuestionAtaTime || "");
+            setOneQuestionAtaTime(quiz.onQuestionAtaTime || "");
             setWebcamRequired(quiz.webcamRequired || "");
             setLockQuestionsAfterAnswering(quiz.lockQuestionsAfterAnswering || "");
             setDueDate(quiz.dueDate || "");
@@ -104,7 +104,7 @@ function QuizDetail() {
                 dispatch(addQuiz(quizzes));
                 setShowSuccess(true);
                 setSuccessMessage(
-                    `Quiz has been ${quiz.isPublished ? "published" : "unpublished"}`
+                    `Quiz publicity status has been updated successfully.`
                 );
             }
             );
