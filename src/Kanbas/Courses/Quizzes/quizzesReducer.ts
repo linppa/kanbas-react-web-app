@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { get } from "http";
 // import { quizzes } from "../../Database";
 
 const initialState = {
@@ -57,8 +58,11 @@ const quizzesSlice = createSlice({
         setQuiz: (state, action) => {
             state.quiz = action.payload;
         },
+        getQuizId: (state, action) => {
+            state.quiz = state.quizzes.find((quiz) => quiz._id === action.payload);
+        }
     },
 });
 
-export const { addQuiz, deleteQuiz, updateQuiz, setQuiz, setQuizzes } = quizzesSlice.actions;
+export const { addQuiz, deleteQuiz, updateQuiz, setQuiz, setQuizzes, getQuizId } = quizzesSlice.actions;
 export default quizzesSlice.reducer;

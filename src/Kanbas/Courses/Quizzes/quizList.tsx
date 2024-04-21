@@ -146,12 +146,10 @@ function QuizList() {
                 />
                 <div>
                     {/* add quiz button */}
-
                         <button className="btn btn-outline-secondary btn-custom-module"
                             onClick={handleAddQuiz}>
                             <FaPlus /> Quiz
                         </button>
-
 
                     <button className="btn btn-outline-secondary btn-custom-ellipses">
                         <FaEllipsisV />
