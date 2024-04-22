@@ -1,3 +1,5 @@
+
+
 import { useNavigate, useParams, Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { KanbasState } from "../../../store";
@@ -6,6 +8,10 @@ import { FaBan, FaPlus, FaSearch } from "react-icons/fa";
 import './index.css';
 import { useEffect, useState } from "react";
 import { addQuiz, setQuiz, updateQuiz, getQuizId } from "../quizzesReducer";
+import React from "react";
+import QuizList from "../quizList";
+import QuestionList from "./Question/questionList";
+import { addQuestion } from "./Question/questionsReducer";
 
 function Questions() {
     const quiz = useSelector((state: KanbasState) =>
@@ -13,6 +19,7 @@ function Questions() {
     const dispatch = useDispatch();
     const { quizId } = useParams();
     const { courseId } = useParams();
+    const { questionId } = useParams();
     const navigate = useNavigate();
     const [profile, setProfile] = useState();
 
@@ -56,7 +63,11 @@ function Questions() {
         } else {
             handleUpdateQuiz(isPublished);
         }
+
     };
+    const handleAddQuestion = () => {
+        if (quizId !== undefined) dispatch(addQuestion(quizId));
+    }
 
 
     return (
@@ -100,7 +111,6 @@ function Questions() {
             </nav>
             <hr />
             <br />
-
             <ul style={{ listStyleType: "none" }}>
                 {quiz.questions.map((question: any, index: number) => (
                     <li key={index} className="grey-border question-box-margin">
@@ -116,7 +126,8 @@ function Questions() {
                     </li>
                 ))}
             </ul>
-
+                {/* Question List Should Go Here */}
+                <QuestionList />
             <br />
             <br />
             <div >
@@ -131,9 +142,8 @@ function Questions() {
                     New Question Group
                 </button>
                 <Link
-                    to={`/Kanbas/Courses/${courseId}/Quizzes/${quizId}/Question`}
-                >
-                    <button className="btn btn-secondary ms-2 float-end " >
+                    to={ `/Kanbas/Courses/${courseId}/Quizzes/${quizId}/Questions/${questionId}/Edit`}>
+                    <button className="btn btn-secondary ms-2 float-end ">
                         <FaPlus aria-hidden="true" />
                         New Question
                     </button>
@@ -146,7 +156,7 @@ function Questions() {
                     <div className="float-start">
                         <input className="form-check-input" type="checkbox" id="check-9" />
                         <label className="form-check-label" htmlFor="check-9"
-                        > Notify users that this content has changed</label>
+                        >Notify users that this content has changed</label>
                     </div>
                     <div>
                         <button

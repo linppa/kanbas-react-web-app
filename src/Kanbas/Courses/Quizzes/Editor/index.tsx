@@ -8,30 +8,6 @@ import { addQuiz, updateQuiz, setQuiz, getQuizId } from "../quizzesReducer";
 import "./index.css";
 import { FaX } from "react-icons/fa6";
 
-// quiz: {
-// _id: "",
-// courseId: "",
-// title: "New Title",
-// description: "New Description",
-// instructions: "",
-// quizType: "Graded Quiz",
-// points: 0,
-// assignmentGroup: "Quizzes",
-// isShuffled: true,
-// timeLimit: 20,
-// isMultipleAttempts: false,
-// showCorrectAnswers: "After Due Date",
-// viewResponse: "After Due Date",
-// accessCode: "",
-// isPublished: false,
-// onQuestionAtaTime: true,
-// webcamRequired: false,
-// lockQuestionsAfterAnswering: false,
-// dueDate: "2024-04-20",
-// availabilityDate: "2024-04-10",
-// untilDate: "2024-04-21",
-// questions: []
-
 function QuizEditor() {
     const { courseId } = useParams();
     const dispatch = useDispatch();

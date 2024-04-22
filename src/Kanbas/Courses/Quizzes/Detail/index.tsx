@@ -8,30 +8,6 @@ import * as client from "../client";
 
 function QuizDetail() {
 
-    // const initialQuiz = {
-    //     _id: "",
-    //     courseId: "",
-    //     title: "New Title",
-    //     description: "New Description",
-    //     quizType: "Graded Quiz",
-    //     points: 0,
-    //     assignmentGroup: "Quizzes",
-    //     isShuffled: true,
-    //     timeLimit: 20,
-    //     isMultipleAttempts: false,
-    //     showCorrectAnswers: "After Due Date",
-    //     viewResponse: "After Due Date",
-    //     accessCode: "New Access Code",
-    //     isPublished: false,
-    //     oneQuestionAtaTime: true,
-    //     webcamRequired: true,
-    //     lockQuestionsAfterAnswering: true,
-    //     dueDate: "2023-04-20",
-    //     availabilityDate: "2023-04-10",
-    //     untilDate: "2023-04-21",
-    //     questions: []
-    // };
-
     const { courseId, quizId } = useParams();
     const dispatch = useDispatch();
 
@@ -336,7 +312,6 @@ function QuizDetail() {
                 >
                     Return to Quizzes
                 </button>
-                <br /><br />
             </div>
         </div>
     ) : (
