@@ -194,21 +194,21 @@ function QuizEditor() {
                         type="button"
                         style={
                             !quiz.isPublished
-                                ? { background: "rgb(2, 128, 2)" }
-                                : { background: "rgba(200, 19, 19)" }
+                                ? { background: "rgba(200, 19, 19)" }
+                                : { background: "rgb(2, 128, 2)" }
                         }
                         className=" btn btn-light">
                         {quiz.isPublished ? (
-                            <FaBan style={{ color: "white" }} className="fas fa-ban" />
+                            < FaCheckCircle style={{ color: "white" }} className="fas fa-ban" />
                         ) : (
-                            <FaCheckCircle
+                            <FaBan
                                 style={{ color: "white" }}
                                 className="fas fa-check-circle"
                             />
                         )}
 
                         <span style={{ color: "white" }}>
-                            <b> {quiz.isPublished ? "Unpublished" : "Published"} </b>
+                            <b> {quiz.isPublished ? "Published" : "Unpublished"} </b>
                         </span>
                     </button>{" "}
                     &nbsp;&nbsp;
