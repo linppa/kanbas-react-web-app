@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useNavigate, useParams, Link, NavLink } from "react-router-dom";
+import { useNavigate, useParams, Link, NavLink, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { KanbasState } from "../../../store";
 import * as client from "../client";
@@ -27,12 +27,12 @@ function QuizEditor() {
         maxWidth: "70%",
         margin: "0 auto",
     };
-
+    const {totalPoints} = useParams();
     // form fields
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [quizType, setQuizType] = useState("");
-    const [points, setPoints] = useState("");
+    const [points, setPoints] = useState(totalPoints);
     const [assignmentGroup, setAssignmentGroup] = useState("");
     const [isShuffled, setIsShuffled] = useState("");
     const [timeLimit, setTimeLimit] = useState("");
@@ -46,6 +46,7 @@ function QuizEditor() {
     const [availabilityDate, setAvailabilityDate] = useState("");
     const [untilDate, setUntilDate] = useState("");
     const [questions, setQuestions] = useState("");
+
 
     // get quiz data if exists
     useEffect(() => {
@@ -180,6 +181,7 @@ function QuizEditor() {
         setUntilDate(e.target.value);
         dispatch(setQuiz({ ...quiz, untilDate: e.target.value }));
     };
+
 
     return (
         <div className="container mt-3">

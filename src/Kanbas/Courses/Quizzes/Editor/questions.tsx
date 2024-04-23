@@ -1,5 +1,4 @@
 
-
 import { useNavigate, useParams, Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { KanbasState } from "../../../store";
@@ -9,71 +8,27 @@ import './index.css';
 import { useEffect, useState } from "react";
 import { addQuiz, setQuiz, updateQuiz, getQuizId } from "../quizzesReducer";
 import React from "react";
-import QuizList from "../quizList";
 import QuestionList from "./Question/questionList";
-import { addQuestion } from "./Question/questionsReducer";
 
 function Questions() {
     const quiz = useSelector((state: KanbasState) =>
         state.quizzesReducer.quiz);
-    const dispatch = useDispatch();
     const { quizId } = useParams();
     const { courseId } = useParams();
-    const { questionId } = useParams();
-    const navigate = useNavigate();
-    const [profile, setProfile] = useState();
+    const questionList = useSelector((state: KanbasState) =>
+        state.questionsReducer.questions); 
 
-    const handleAddQuiz = (isPublished: any) => {
-        if (isPublished) {
-            const newQuiz = { ...quiz, isPublished: true };
-            dispatch(setQuiz(newQuiz));
-            client.createQuiz(courseId ?? '', newQuiz).then((newQ) => {
-                dispatch(addQuiz(newQ));
-                dispatch(setQuiz(newQ));
-                navigate(`/Kanbas/Courses/${courseId}/Quizzes/${newQ._id}`); // Navigate after receiving the response
-            });
-        } else {
-            client.createQuiz(courseId ?? '', quiz).then((newQuiz) => {
-                dispatch(addQuiz(newQuiz));
-                dispatch(setQuiz(newQuiz));
-                navigate(`/Kanbas/Courses/${courseId}/Quizzes/${newQuiz._id}`); // Navigate after receiving the response
-            });
-        }
-    };
-
-    const handleUpdateQuiz = (isPublish: any) => {
-        if (isPublish) {
-            const updatedQuiz = { ...quiz, isPublished: true };
-            dispatch(setQuiz(updatedQuiz));
-            client.updateQuiz(updatedQuiz).then(() => {
-                dispatch(updateQuiz(updatedQuiz));
-                navigate(`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`); // Navigate after receiving the response
-            });
-        } else {
-            client.updateQuiz(quiz).then(() => {
-                dispatch(updateQuiz(quiz));
-                dispatch(setQuiz(quiz));
-                navigate(`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`); // Navigate after receiving the response
-            });
-        }
-    };
-    const handleSave = (isPublished: any) => {
-        if (quizId === "new") {
-            handleAddQuiz(isPublished);
-        } else {
-            handleUpdateQuiz(isPublished);
-        }
-
-    };
-    const handleAddQuestion = () => {
-        if (quizId !== undefined) dispatch(addQuestion(quizId));
-    }
-
-
+    // Calculate the total points of the quiz
+    /*
+    * Need to be able to implement this total points of the quiz when saving this form
+    * Need to alter the quiz.points to be the total points of the quiz determined by looking at the sum
+    */
+    const totalPoints = questionList.reduce((sum, question) => sum + question.points, 0);
+    
     return (
         <div className="me-5">
             <div className="float-end mt-2 ">
-                Points : {quiz.points} &nbsp; &nbsp;
+                Points : {totalPoints} &nbsp; &nbsp;
                 {quiz.isPublished ? <i className="fa fa-check-circle" style={{ color: "green" }} aria-hidden="true"></i> : <FaBan style={{ color: "grey" }} className="text-danger" aria-hidden="true" />}&nbsp;
                 {quiz.isPublished ? "Published" : "Not Published"}
                 <button type="button" className="btn btn-light"><i className="fa fa-ellipsis-v ms-2"></i></button>
@@ -81,7 +36,7 @@ function Questions() {
             <br />
             <br />
             <hr />
-            <nav  className="navbar navbar-expand-lg navbar-light bg-color-lightgray">
+            <nav className="navbar navbar-expand-lg navbar-light bg-color-lightgray">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -111,44 +66,8 @@ function Questions() {
             </nav>
             <hr />
             <br />
-            <ul style={{ listStyleType: "none" }}>
-                {quiz.questions.map((question: any, index: number) => (
-                    <li key={index} className="grey-border question-box-margin">
-                        <div style={{ display: "flex", justifyContent: "space-between", backgroundColor: "lightgray" }}>
-                            <h4 className="m-2">{question.title}</h4>
-                            <div className="m-2">{question.points} pts</div>
-                        </div>
-                        <div className="question-box" style={{ display: "flex", justifyContent: "space-between" }}>
-                            <p>{question.question}</p>
-                            <button className="btn btn-danger float-end"
-                            >Edit</button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
                 {/* Question List Should Go Here */}
                 <QuestionList />
-            <br />
-            <br />
-            <div >
-
-                <button className="btn btn-secondary ms-2 float-end">
-                    <FaSearch aria-hidden="true" />
-                    Find Questions
-                </button>
-
-                <button className="btn btn-secondary ms-2 float-end">
-                    <FaPlus aria-hidden="true" />
-                    New Question Group
-                </button>
-                <Link
-                    to={ `/Kanbas/Courses/${courseId}/Quizzes/${quizId}/Questions/${questionId}/Edit`}>
-                    <button className="btn btn-secondary ms-2 float-end ">
-                        <FaPlus aria-hidden="true" />
-                        New Question
-                    </button>
-                </Link>
-            </div>
             <br />
             <br />
             <hr />
@@ -159,18 +78,17 @@ function Questions() {
                         >Notify users that this content has changed</label>
                     </div>
                     <div>
-                        <button
-                            onClick={() => handleSave(false)}
+                        <Link to={`/Kanbas/Courses/${courseId}/Quizzes/${quizId}/Edit`}
+                            
                             className="btn btn-success ms-2 float-end"
                         >
                             Save
-                        </button>
-                        <button
-                            onClick={() => handleSave(true)}
+                        </Link>
+                        <Link to = {`/Kanbas/Courses/${courseId}/Quizzes/${quizId}/Edit`}
                             className="btn btn-primary ms-2 float-end"
                         >
                             Save & Publish
-                        </button>
+                        </Link>
                         <Link to={`/Kanbas/Courses/${courseId}/Quizzes`}
                             className="btn btn-danger float-end">
                             Cancel

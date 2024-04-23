@@ -9,7 +9,7 @@ function MultipleChoiceEditor(_question: any) {
     const { courseId, quizId, questionId } = useParams();
     const [question, setQuestion] = useState(_question.question.question);
     const [title, setTitle] = useState(_question.question.title);
-    const [options, setOptions] = useState(_question.question.options);
+    const [options, setOptions] = useState(_question.question.options || {});
     const [correctAnswer, setCorrectAnswer] = useState(_question.question.correctAnswer);
     const [points, setPoints] = useState(_question.question.points);
     const dispatch = useDispatch();
@@ -17,6 +17,7 @@ function MultipleChoiceEditor(_question: any) {
 
     const handleSave = () => {
         const questionObj = {
+            _id: questionId,
             question: question,
             type: "MULTIPLE_CHOICE",
             title: title,
@@ -26,7 +27,7 @@ function MultipleChoiceEditor(_question: any) {
             correctAnswer: correctAnswer
         };
         if (questionId) {
-            dispatch(updateQuestion({ _id: questionId, ...questionObj }));
+            dispatch(updateQuestion({ ...questionObj }));
         } else {
             dispatch(addQuestion(questionObj));
         }
@@ -71,6 +72,9 @@ function MultipleChoiceEditor(_question: any) {
                             onChange={(e) => setPoints(parseInt(e.target.value))}
                         />
                     </div>
+                    <div style={{ marginLeft: "10px" }}>
+                        <span>pts</span>
+                    </div>
                     <br />
                     <br />
                 </div>
@@ -99,6 +103,7 @@ function MultipleChoiceEditor(_question: any) {
             {Object.entries(options).map(([key, value]) => (
                 <div key={key}>
                     {key === correctAnswer ? (
+                        // Correct Answer
                         <div style={{ display: "inline-block", border: "2px solid green", padding: "15px", marginBottom: "15px", borderRadius: "5px" }}>
                             <span style={{ color: "green" }}>
                                 <FaArrowAltCircleRight /> &nbsp;Correct Answer: &nbsp;

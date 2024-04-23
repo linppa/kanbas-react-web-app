@@ -40,3 +40,7 @@ export const findQuizById = async (quizId: string) => {
         .get(`${QUIZZES_API}/${quizId}`);
     return response.data;
 };
+
+export function createQuestion(arg0: string, initialQuestion: { _id: string; question: string; type: string; title: string; quizId: string; points: number; options: {}; correctAnswer: string; answer: string; }) {
+    throw new Error("Function not implemented.");
+}
